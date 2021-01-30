@@ -7,7 +7,7 @@ const Layout = ({ title, children }) => {
       <div className='font-futura'>
         <Nav />
         <Head>{title}</Head>
-        <div>{children}</div>
+        <div className='container pt-10'>{children}</div>
       </div>
     </>
   );

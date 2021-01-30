@@ -1,13 +1,14 @@
+import React from 'react';
 import Layout from '../components/Layout';
 
-const Watches = () => {
+const Basket = () => {
   return (
     <Layout>
       <div>
-        <h1>Welcome to the watch app</h1>
+        <h1>Your basket is empty</h1>
       </div>
     </Layout>
   );
 };
 
-export default Watches;
+export default Basket;

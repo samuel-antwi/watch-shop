@@ -1,13 +1,14 @@
+import React from 'react';
 import Layout from '../components/Layout';
 
-const Watches = () => {
+const SavedItems = () => {
   return (
     <Layout>
       <div>
-        <h1>Welcome to the watch app</h1>
+        <h1>Saved items</h1>
       </div>
     </Layout>
   );
 };
 
-export default Watches;
+export default SavedItems;
