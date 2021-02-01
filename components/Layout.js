@@ -4,10 +4,10 @@ import Nav from './Nav';
 const Layout = ({ title, children }) => {
   return (
     <>
-      <div className='font-futura'>
+      <div className='font-futura bg-site'>
         <Nav />
         <Head>{title}</Head>
-        <div className='container pt-10'>{children}</div>
+        <div className='max-w-7xl mx-auto pt-10 min-h-screen'>{children}</div>
       </div>
     </>
   );
