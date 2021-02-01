@@ -14,7 +14,7 @@ const Nav = () => {
 
   return (
     <>
-      <div className='bg-primary text-gray-100 hidden smd:block'>
+      <div className='bg-primary text-gray-100 hidden sm:block'>
         <div className='md:px-10'>
           <div className='flex items-center justify-between py-5 xl:py-0'>
             <div className='flex items-center'>
@@ -87,7 +87,7 @@ export const MiniNav = () => {
   const [isOpen, setOpen] = useState(false);
   return (
     <div className='bg-gray-900 p-5 text-gray-100'>
-      <div className='hidden smd:block'>
+      <div className='hidden sm:block'>
         <div className='container flex justify-between items-center space-x-4'>
           <Link href='/'>
             <a className='uppercase font-bold py-1.5 px-5 text-gray-100 tracking-wider border-2 border-gray-100'>
@@ -105,7 +105,7 @@ export const MiniNav = () => {
           </Link>
         </div>
       </div>
-      <div className='smd:hidden'>
+      <div className='sm:hidden'>
         <div className='flex items-center justify-between text-gray-100'>
           <Link href='/'>
             <a className='text-2xl font-bold'>iwatches</a>

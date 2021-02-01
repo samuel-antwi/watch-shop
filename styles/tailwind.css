@@ -15,6 +15,11 @@
   }
   @font-face {
     font-family: Futura;
+    font-weight: 600;
+    src: url(/fonts/FuturaStd-Heavy.otf) format('woff');
+  }
+  @font-face {
+    font-family: Futura;
     font-weight: 700;
     src: url(/fonts/FuturaStd-Bold.otf) format('woff');
   }
@@ -22,5 +27,14 @@
     font-family: Futura;
     font-weight: 800;
     src: url(/fonts/FuturaStd-ExtraBold.otf) format('woff');
+  }
+}
+
+@layer components {
+  .btn-indigo {
+    @apply py-2 text-xs px-4 cursor-pointer bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75;
+  }
+  .saved-btn {
+    @apply bg-gray-200 rounded-full cursor-pointer h-10 w-10 flex items-center justify-center;
   }
 }
