@@ -30,11 +30,17 @@
   }
 }
 
+/* Extracted css component */
 @layer components {
   .btn-indigo {
     @apply py-2 text-xs px-4 cursor-pointer bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75;
   }
   .saved-btn {
     @apply bg-gray-200 rounded-full cursor-pointer h-10 w-10 flex items-center justify-center;
+  }
+
+  /* Watch detail */
+  .btn_add_to_basket {
+    @apply bg-green-600 flex-1 mr-5  text-white text-sm font-semibold tracking-wider py-2 hover:bg-green-700 focus:ring-opacity-75 focus:ring-green-400 focus:outline-none;
   }
 }

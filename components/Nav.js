@@ -5,9 +5,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Turn as Hamburger } from 'hamburger-react';
 import SearchBar from './SearchBar';
+import { useStateProvider } from '../context/stateProvider';
 
 const Nav = () => {
-  const [basket, setBasket] = useState(['s', '3']);
+  const { basket } = useStateProvider();
   const router = useRouter();
   const watchesRouter = router.pathname === '/';
   const strapsRouter = router.pathname === '/straps';
@@ -66,9 +67,11 @@ const Nav = () => {
                         <BsBagFill size={25} />
                       )}
                     </span>
-                    <span className=' text-center  text-xs font-medium '>
-                      <p className='text-gray-800 -mt-4'>{basket.length} </p>
-                    </span>
+                    {basket.length !== 0 && (
+                      <span className=' text-center  text-xs font-medium '>
+                        <p className='text-gray-800 -mt-4'>{basket.length}</p>
+                      </span>
+                    )}
                   </a>
                 </Link>
               </div>
