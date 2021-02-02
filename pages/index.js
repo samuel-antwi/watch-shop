@@ -1,13 +1,15 @@
 import Layout from '../components/Layout';
 import WatchList from '../components/WatchList';
+import { useStateProvider } from '../context/stateProvider';
 import graphcms from '../graphql/client';
 import { ALL_WATCHES } from '../graphql/queries';
 
 const Watches = ({ edges, pageInfo }) => {
-  console.log(edges);
+  const { user } = useStateProvider();
+
   return (
     <Layout>
-      <div className='pt-48'>
+      <div>
         <WatchList products={edges} />
       </div>
     </Layout>
