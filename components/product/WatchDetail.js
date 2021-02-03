@@ -3,8 +3,13 @@ import Markdown from 'react-markdown';
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
 import { useState } from 'react';
 import { useStateProvider } from 'context/stateProvider';
+import 'react-slideshow-image/dist/styles.css';
+import { Slide } from 'react-slideshow-image';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import Image from 'next/image';
 
 const WatchDetail = ({ product }) => {
+  const [imageIndex, setImageIndex] = useState(0);
   const { addToBasket } = useStateProvider();
   const [isHovered, setIsHovered] = useState(false);
   const {
@@ -18,24 +23,39 @@ const WatchDetail = ({ product }) => {
     price,
     reviews,
   } = product;
-  console.log(images);
   return (
     <div>
       <div className='md:grid md:grid-cols-7 lg:gap-10 gap-5'>
         <div className='col-span-1 pt-4 -mr-5 hidden md:block'>
-          {images.map((image) => (
-            <img
-              className='w-16 shadow-xl mb-5'
-              key={image.id}
-              src={image.url}
-              alt={name}
-            />
+          {images.map((image, index) => (
+            <div key={image.id}>
+              <button onClick={() => setImageIndex(index)}>
+                <img
+                  className='w-16 shadow-xl mb-5'
+                  src={image.url}
+                  alt={name}
+                />
+              </button>
+            </div>
           ))}
         </div>
-        <div className='col-span-3'>
-          <img src={images[0].url} alt={name} />
+        <div className='col-span-3 mr-10'>
+          <div className='inline-flex items-center'>
+            <PrevArrow imageIndex={imageIndex} setImageIndex={setImageIndex} />
+            <Image
+              src={images[imageIndex].url}
+              alt={name}
+              width={500}
+              height={500}
+            />
+            {/* <img src={images[imageIndex].url} alt={name} /> */}
+            <NextArrow imageIndex={imageIndex} setImageIndex={setImageIndex} />
+          </div>
         </div>
         <div className='col-span-3 pt-4 lg:ml-5 ml-0'>
+          <h2 className='mb-5 font-bold tracking-wider'>
+            Apple Watch | <span>{model}</span>
+          </h2>
           <p className='md:text-lg tracking-wider text-gray-800 mb-5'>{name}</p>
           <p className='mb-2 font-semibold tracking-widest text-gray-800 text-lg'>
             £{price}.00
@@ -52,22 +72,23 @@ const WatchDetail = ({ product }) => {
           ) : (
             <p className='text-red-600 mb-3'>Out of stock</p>
           )}
-          <div>
-            <Markdown className='mb-5' source={description.markdown} />
-            <div className='flex items-center justify-between'>
-              <button
-                onClick={() => addToBasket(product)}
-                className='btn_add_to_basket'>
-                ADD TO BAG
-              </button>
-              <span className='saved-btn'>
-                {isHovered ? (
-                  <BsHeartFill className='' size={20} />
-                ) : (
-                  <BsHeart className='' size={20} />
-                )}
-              </span>
-            </div>
+          <Markdown
+            className='mb-5 tracking-wide'
+            source={description.markdown}
+          />
+          <div className='flex items-center justify-between'>
+            <button
+              onClick={() => addToBasket(product)}
+              className='btn_add_to_basket'>
+              ADD TO BAG
+            </button>
+            <span className='saved-btn'>
+              {isHovered ? (
+                <BsHeartFill className='' size={20} />
+              ) : (
+                <BsHeart className='' size={20} />
+              )}
+            </span>
           </div>
         </div>
       </div>
@@ -76,3 +97,44 @@ const WatchDetail = ({ product }) => {
 };
 
 export default WatchDetail;
+
+export const NextArrow = ({ imageIndex, setImageIndex }) => {
+  return (
+    <button
+      onClick={() => setImageIndex((prev) => prev + 1)}
+      className=''
+      disabled={imageIndex === 2}>
+      <BsChevronRight
+        className={` ${
+          imageIndex === 2 ? 'text-gray-400 cursor-default' : 'text-gray-900'
+        }`}
+        size={30}
+      />
+    </button>
+  );
+};
+export const PrevArrow = ({ imageIndex, setImageIndex }) => {
+  return (
+    <button
+      onClick={() => setImageIndex((prev) => prev - 1)}
+      className=''
+      disabled={imageIndex === 0}>
+      <BsChevronLeft
+        className={`${
+          imageIndex === 0 ? 'text-gray-400 cursor-default' : 'text-gray-900'
+        }`}
+        size={30}
+      />
+    </button>
+  );
+};
+
+{
+  /* <Slide autoplay={false} infinite={false}>
+  {images.map((image) => (
+    <div key={image.id}>
+      <img src={image.url} alt={name} />
+    </div>
+  ))}
+</Slide>; */
+}

@@ -55,3 +55,18 @@ export const GET_WATCH = gql`
     }
   }
 `;
+
+export const GET_RELATED_WATCHES = gql`
+  query relatedWatches($slug: String!, $size: Int) {
+    __typename
+    products(where: { slug_not: $slug }, last: $size) {
+      id
+      images {
+        url
+      }
+      name
+      price
+      slug
+    }
+  }
+`;
