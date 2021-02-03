@@ -39,7 +39,7 @@ const WatchDetail = ({ product }) => {
             </div>
           ))}
         </div>
-        <div className='col-span-3 mr-10'>
+        <div className='col-span-3 md:mr-10'>
           <div className='inline-flex items-center'>
             <PrevArrow imageIndex={imageIndex} setImageIndex={setImageIndex} />
             <Image
@@ -48,7 +48,6 @@ const WatchDetail = ({ product }) => {
               width={500}
               height={500}
             />
-            {/* <img src={images[imageIndex].url} alt={name} /> */}
             <NextArrow imageIndex={imageIndex} setImageIndex={setImageIndex} />
           </div>
         </div>

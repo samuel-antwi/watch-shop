@@ -8,7 +8,7 @@ import { useStateProvider } from '../context/stateProvider';
 
 const WatchList = ({ products }) => {
   const { addToBasket, basket } = useStateProvider();
-
+  const { addToViewedItems } = useStateProvider();
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -20,7 +20,7 @@ const WatchList = ({ products }) => {
             key={id}
             className='col-span-1 bg-white shadow-2xl rounded-2xl relative'>
             <Link href={`/product/${slug}/`}>
-              <a>
+              <a onClick={() => addToViewedItems(product)}>
                 <ImageDiv>
                   <Image
                     src={images[0].url}
