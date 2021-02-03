@@ -89,7 +89,7 @@ export default Nav;
 export const MiniNav = () => {
   const [isOpen, setOpen] = useState(false);
   return (
-    <div className='bg-gray-900 p-5 text-gray-100'>
+    <div className='bg-green-700 p-5 text-gray-100'>
       <div className='hidden sm:block'>
         <div className='container flex justify-between items-center space-x-4'>
           <Link href='/'>

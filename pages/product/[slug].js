@@ -1,15 +1,23 @@
 import Layout from '@/components/Layout';
 import WatchDetail from '@/components/product/WatchDetail';
+import RecentlyViewed from '@/components/RecentlyViewed';
 import RelatedWatches from '@/components/RelatedWatches';
 import graphcms from 'graphql/client';
 import { ALL_WATCHES, GET_WATCH } from 'graphql/queries';
 
 const ProductDetail = ({ product }) => {
+  const array1 = [5, 12, 8, 130, 44];
+
+  const found = array1.find((element) => element > 50);
+
+  console.log(found);
+
   return (
     <Layout>
       <div className='max-w-6xl mx-auto sm:px-10 px-5'>
         <WatchDetail product={product} />
         <RelatedWatches />
+        <RecentlyViewed />
       </div>
     </Layout>
   );
