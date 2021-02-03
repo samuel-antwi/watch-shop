@@ -23,7 +23,7 @@ export const getStaticProps = async () => {
     productsConnection: { edges, pageInfo },
   } = await graphcms.request(ALL_WATCHES, {
     slug: 'watch',
-    pageSize: 10,
+    pageSize: 12,
   });
   return {
     props: {

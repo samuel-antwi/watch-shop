@@ -9,7 +9,6 @@ import { useStateProvider } from '../context/stateProvider';
 const WatchList = ({ products }) => {
   const { addToBasket, basket } = useStateProvider();
 
-  console.log(basket);
   const [isHovered, setIsHovered] = useState(false);
 
   return (

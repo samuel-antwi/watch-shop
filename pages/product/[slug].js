@@ -1,13 +1,15 @@
 import Layout from '@/components/Layout';
 import WatchDetail from '@/components/product/WatchDetail';
+import RelatedWatches from '@/components/RelatedWatches';
 import graphcms from 'graphql/client';
 import { ALL_WATCHES, GET_WATCH } from 'graphql/queries';
 
 const ProductDetail = ({ product }) => {
   return (
     <Layout>
-      <div className='max-w-5xl mx-auto px-10'>
+      <div className='max-w-6xl mx-auto sm:px-10 px-5'>
         <WatchDetail product={product} />
+        <RelatedWatches />
       </div>
     </Layout>
   );
@@ -17,7 +19,7 @@ export default ProductDetail;
 
 export const getStaticPaths = async () => {
   const { productsConnection } = await graphcms.request(ALL_WATCHES, {
-    pageSize: 10,
+    pageSize: 1000,
     slug: 'watch',
   });
   return {
