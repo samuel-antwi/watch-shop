@@ -6,11 +6,11 @@ import { StateContext } from './stateContext';
 export const StateProvider = ({ children }) => {
   const initialState = {
     basket: [],
-    saved: [],
     viewedItems: [],
+    saved: [],
   };
+
   const [state, dispatch] = useReducer(productReducer, initialState);
-  const [user, setUser] = useState(null);
   const [durationNotification, setDurationNotification] = useState(true);
   const [showMiniBasket, setMiniBasket] = useState(false);
 
@@ -49,7 +49,6 @@ export const StateProvider = ({ children }) => {
       value={{
         basket: state.basket,
         viewedItems: state.viewedItems,
-        user,
         addToBasket,
         addToViewedItems,
         durationNotification,
