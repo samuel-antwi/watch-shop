@@ -9,8 +9,8 @@ const MiniBasket = () => {
   const { basket, setMiniBasket } = useStateProvider();
   return (
     <motion.div
-      initial={{ x: 500 }}
-      animate={{ x: 0 }}
+      initial={{ y: -500 }}
+      animate={{ y: 0 }}
       transition={{ duration: 1 }}
       className='absolute right-5 top-20 z-20 bg-white'>
       {basket.length > 0 ? (

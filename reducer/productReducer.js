@@ -5,21 +5,21 @@ import {
   INCREASE,
 } from 'types';
 
-const Storage = (basket) => {
-  localStorage.setItem('cart', JSON.stringify(basket.length > 0 ? basket : []));
-};
+// const Storage = (basket) => {
+//   localStorage.setItem('cart', JSON.stringify(basket.length > 0 ? basket : []));
+// };
 
-export const sumItems = (basket) => {
-  Storage(basket);
-  let itemCount = basket.reduce(
-    (total, product) => total + product.quantity,
-    0
-  );
-  let total = basket
-    .reduce((total, product) => total + product.price * product.quantity, 0)
-    .toFixed(2);
-  return { itemCount, total };
-};
+// export const sumItems = (basket) => {
+//   Storage(basket);
+//   let itemCount = basket.reduce(
+//     (total, product) => total + product.quantity,
+//     0
+//   );
+//   let total = basket
+//     .reduce((total, product) => total + product.price * product.quantity, 0)
+//     .toFixed(2);
+//   return { itemCount, total };
+// };
 
 const productReducer = (state, action) => {
   console.log(action.payload);
@@ -31,7 +31,7 @@ const productReducer = (state, action) => {
           (item) => item.product.id === action.payload.product.id
         )
       ) {
-        state.basket.push({
+        state?.basket.push({
           ...action.payload,
           quantity: 1,
         });

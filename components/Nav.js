@@ -62,7 +62,7 @@ const Nav = () => {
               <div className=' px-10 cursor-pointer'>
                 <div
                   className='relative'
-                  onMouseMove={() => setMiniBasket(true)}>
+                  onMouseEnter={() => setMiniBasket(true)}>
                   <span>
                     {!basket.length ? (
                       <BsBag size={25} />
