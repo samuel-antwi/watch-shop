@@ -41,6 +41,6 @@
 
   /* Watch detail */
   .btn_add_to_basket {
-    @apply bg-green-600 flex-1 mr-5  text-white text-sm font-semibold tracking-wider py-2 hover:bg-green-700 focus:ring-opacity-75 focus:ring-green-400 focus:outline-none;
+    @apply bg-green-600 flex-1 mr-5  text-white text-sm font-semibold tracking-wider py-3 hover:bg-green-700 focus:ring-opacity-75 focus:ring-green-400 focus:outline-none;
   }
 }

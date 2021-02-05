@@ -38,7 +38,7 @@ const WatchList = ({ products }) => {
               <div className='flex justify-between items-center absolute w-11/12 bottom-3'>
                 <p className='font-medium'>£{price}</p>
                 <Button
-                  onClick={() => addToBasket(product)}
+                  onClick={() => addToBasket(product.node)}
                   className='btn-indigo add_to_basket'>
                   ADD TO BAG
                 </Button>

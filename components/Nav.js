@@ -6,15 +6,17 @@ import { useRouter } from 'next/router';
 import { Turn as Hamburger } from 'hamburger-react';
 import SearchBar from './SearchBar';
 import { useStateProvider } from '../context/stateProvider';
+import MiniBasket from './miniBasket/MiniBasket';
 
 const Nav = () => {
-  const { basket } = useStateProvider();
+  const { basket, setMiniBasket, showMiniBasket } = useStateProvider();
   const router = useRouter();
   const watchesRouter = router.pathname === '/';
   const strapsRouter = router.pathname === '/straps';
 
   return (
     <>
+      {showMiniBasket && <MiniBasket />}
       <div className='bg-primary text-gray-100 hidden sm:block'>
         <div className='md:px-10'>
           <div className='flex items-center justify-between py-5 xl:py-0'>
@@ -57,23 +59,23 @@ const Nav = () => {
                   <BsHeart size={25} />
                 </a>
               </Link>
-              <div className=' px-10'>
-                <Link href='/basket'>
-                  <a className='relative'>
-                    <span>
-                      {!basket.length ? (
-                        <BsBag size={25} />
-                      ) : (
-                        <BsBagFill size={25} />
-                      )}
-                    </span>
-                    {basket.length !== 0 && (
-                      <span className=' text-center  text-xs font-medium '>
-                        <p className='text-gray-800 -mt-4'>{basket.length}</p>
-                      </span>
+              <div className=' px-10 cursor-pointer'>
+                <div
+                  className='relative'
+                  onMouseMove={() => setMiniBasket(true)}>
+                  <span>
+                    {!basket.length ? (
+                      <BsBag size={25} />
+                    ) : (
+                      <BsBagFill size={25} />
                     )}
-                  </a>
-                </Link>
+                  </span>
+                  {basket.length !== 0 && (
+                    <span className=' text-center  text-xs font-medium '>
+                      <p className='text-gray-800 -mt-4'>{basket.length}</p>
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -89,7 +91,7 @@ export default Nav;
 export const MiniNav = () => {
   const [isOpen, setOpen] = useState(false);
   return (
-    <div className='bg-green-700 p-5 text-gray-100'>
+    <div className='bg-secondary p-5 text-gray-100 z-10'>
       <div className='hidden sm:block'>
         <div className='container flex justify-between items-center space-x-4'>
           <Link href='/'>
