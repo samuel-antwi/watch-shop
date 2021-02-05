@@ -6,8 +6,6 @@ import { elipsis } from 'utils/elipsis';
 const RecentlyViewed = () => {
   const { viewedItems } = useStateProvider();
 
-  console.log(viewedItems);
-
   return viewedItems.length !== 0 ? (
     <div className='mt-32'>
       <h1 className=' font-bold mb-3 tracking-wide uppercase text-gray-800'>

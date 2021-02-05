@@ -5,7 +5,7 @@ import graphcms from '../graphql/client';
 import { ALL_WATCHES } from '../graphql/queries';
 
 const Watches = ({ edges, pageInfo }) => {
-  const { user } = useStateProvider();
+  const { user, showMiniBasket } = useStateProvider();
 
   return (
     <Layout>

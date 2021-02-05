@@ -4,13 +4,10 @@ import RecentlyViewed from '@/components/RecentlyViewed';
 import RelatedWatches from '@/components/RelatedWatches';
 import graphcms from 'graphql/client';
 import { ALL_WATCHES, GET_WATCH } from 'graphql/queries';
+import { useStateProvider } from 'context/stateProvider';
 
 const ProductDetail = ({ product }) => {
-  const array1 = [5, 12, 8, 130, 44];
-
-  const found = array1.find((element) => element > 50);
-
-  console.log(found);
+  const { basket, durationNotification, showMiniBasket } = useStateProvider();
 
   return (
     <Layout>
@@ -41,9 +38,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  console.log(params);
   const { product } = await graphcms.request(GET_WATCH, { slug: params.slug });
-  console.log(product);
   return {
     props: {
       product,

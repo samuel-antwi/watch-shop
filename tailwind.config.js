@@ -10,7 +10,6 @@ module.exports = {
         ...theme('colors'),
         primary: '#2d2d2d',
         secondary: '#525050',
-        // site: '#f4ecde',
         site: '#f5f5f5',
       }),
       screens: {
@@ -26,6 +25,9 @@ module.exports = {
       container: {
         center: true,
         padding: '1.5rem',
+      },
+      maxHeight: {
+        100: '30rem',
       },
     },
   },

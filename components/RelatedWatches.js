@@ -38,7 +38,7 @@ const RelatedWatches = () => {
             return (
               <Link href={`/product/${slug}`} key={id}>
                 <a
-                  onClick={() => addToViewedItems(product)}
+                  // onClick={() => addToViewedItems(product)}
                   className='col-span-1'>
                   <Image src={images[0].url} width={200} height={200} />
                   <p className='text-sm mb-3'>{elipsis(name)}</p>
