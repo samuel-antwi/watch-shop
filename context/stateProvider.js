@@ -3,18 +3,41 @@ import { ADD_TO_BASKET, ADD_TO_VIEWED_ITEMS, REMOVE_FROM_BASKET } from 'types';
 import productReducer from '../reducer/productReducer';
 import { StateContext } from './stateContext';
 
-export const StateProvider = ({ children }) => {
-  const initialState = {
-    basket: [],
-    viewedItems: [],
-    saved: [],
-  };
+let initialState = {
+  basket: [],
+  viewedItems: [],
+  saved: [],
+};
 
-  const [state, dispatch] = useReducer(productReducer, initialState);
+export const StateProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(productReducer, initialState, () => {
+    if (process.browser) {
+      const localData = localStorage.getItem('state');
+      if (localData) {
+        return JSON.parse(localData);
+      }
+    }
+    return { ...initialState };
+  });
   const [durationNotification, setDurationNotification] = useState(true);
   const [showMiniBasket, setMiniBasket] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
 
-  // console.log(state.basket);
+  console.log(state);
+  console.log(state.basket);
+
+  // useEffect(() => {
+  //   const localData = localStorage.getItem('state');
+  //   if (localData) {
+  //     return {
+  //       state: JSON.parse(localData),
+  //     };
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    localStorage.setItem('state', JSON.stringify(state));
+  }, [state]);
 
   // Add product to basket
   const addToBasket = (product) => {
@@ -56,6 +79,8 @@ export const StateProvider = ({ children }) => {
         showMiniBasket,
         setMiniBasket,
         removeFromBasket,
+        isDeleted,
+        setIsDeleted,
       }}>
       {children}
     </StateContext.Provider>
@@ -63,6 +88,7 @@ export const StateProvider = ({ children }) => {
 };
 
 export const useStateProvider = () => useContext(StateContext);
+
 // import { useContext, useState, useReducer } from 'react';
 // import { ADD_TO_BASKET, ADD_TO_VIEWED_ITEMS, REMOVE_FROM_BASKET } from 'types';
 // import productReducer from '../reducer/productReducer';

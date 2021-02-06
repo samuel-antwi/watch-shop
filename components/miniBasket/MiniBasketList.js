@@ -3,16 +3,14 @@ import { BsTrash } from 'react-icons/bs';
 import { useStateProvider } from 'context/stateProvider';
 import { useRouter, UseRouter } from 'next/router';
 import Link from 'next/link';
-import RemoveFromBaketFeedback from './RemoveFromBaketFeedback';
+import RemoveFromBaketFeedback from '../RemoveFromBaketFeedback';
 
 const MiniBasketList = () => {
   const { setMiniBasket, removeFromBasket } = useStateProvider();
 
   const { basket } = useStateProvider();
-  console.log(basket);
   return basket.length !== 0 ? (
     <div className='max-h-100 overflow-scroll'>
-      <RemoveFromBaketFeedback />
       {basket?.map(({ product, quantity }) => {
         const { name, images, price, id, slug } = product;
         return (
