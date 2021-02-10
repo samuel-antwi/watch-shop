@@ -1,6 +1,7 @@
 import 'styles/tailwind.css';
 import { StateProvider } from 'context/stateProvider';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import SnackbarProvider from 'react-simple-snackbar';
 
 const client = new QueryClient({
   defaultOptions: {
@@ -14,7 +15,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={client}>
       <StateProvider>
-        <Component {...pageProps} />
+        <SnackbarProvider>
+          <Component {...pageProps} />
+        </SnackbarProvider>
       </StateProvider>
     </QueryClientProvider>
   );

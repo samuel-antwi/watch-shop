@@ -24,71 +24,66 @@ const WatchDetail = ({ product }) => {
     reviews,
   } = product;
   return (
-    <div>
-      <div className='md:grid md:grid-cols-7 lg:gap-10 gap-5'>
-        <div className='col-span-1 pt-4 -mr-5 hidden md:block'>
-          {images.map((image, index) => (
-            <div key={image.id}>
-              <button onClick={() => setImageIndex(index)}>
-                <img
-                  className='w-16 shadow-xl mb-5'
-                  src={image.url}
-                  alt={name}
-                />
-              </button>
-            </div>
-          ))}
-        </div>
-        <div className='col-span-3 md:mr-10'>
-          <div className='inline-flex items-center'>
-            <PrevArrow imageIndex={imageIndex} setImageIndex={setImageIndex} />
-            <Image
-              src={images[imageIndex].url}
-              alt={name}
-              width={500}
-              height={500}
-            />
-            <NextArrow imageIndex={imageIndex} setImageIndex={setImageIndex} />
-          </div>
-        </div>
-        <div className='col-span-3 pt-4 lg:ml-5 ml-0'>
-          <h2 className='mb-5 font-bold tracking-wider'>
-            Apple Watch | <span>{model}</span>
-          </h2>
-          <p className='md:text-lg tracking-wider text-gray-800 mb-5'>{name}</p>
-          <p className='mb-2 font-semibold tracking-widest text-gray-800 text-lg'>
-            £{price}.00
-          </p>
-          <div className='mb-3'>
-            <Link href='/'>
-              <a className='underline font-thin text-sm text-gray-700'>
-                Free Delivery & Returns (Ts & Cs apply)
-              </a>
-            </Link>
-          </div>
-          {instock ? (
-            <p className='text-green-600 mb-3'>In stock</p>
-          ) : (
-            <p className='text-red-600 mb-3'>Out of stock</p>
-          )}
-          <Markdown
-            className='mb-5 tracking-wide'
-            source={description.markdown}
-          />
-          <div className='flex items-center justify-between'>
-            <button
-              onClick={() => addToBasket(product)}
-              className='btn_add_to_basket'>
-              ADD TO BAG
+    <div className='md:grid md:grid-cols-7 lg:gap-10 gap-5'>
+      <div className='col-span-1 pt-4 -mr-5 hidden md:block'>
+        {images.map((image, index) => (
+          <div key={image.id}>
+            <button onClick={() => setImageIndex(index)}>
+              <img className='w-16  mb-5' src={image.url} alt={name} />
             </button>
-            <span className='saved-btn'>
-              {isHovered ? (
-                <BsHeartFill className='' size={20} />
-              ) : (
-                <BsHeart className='' size={20} />
-              )}
-            </span>
           </div>
+        ))}
+      </div>
+      <div className='col-span-3 md:mr-10'>
+        <div className='inline-flex items-center'>
+          <PrevArrow imageIndex={imageIndex} setImageIndex={setImageIndex} />
+          <Image
+            src={images[imageIndex].url}
+            alt={name}
+            width={500}
+            height={500}
+            priority={true}
+          />
+          <NextArrow imageIndex={imageIndex} setImageIndex={setImageIndex} />
+        </div>
+      </div>
+      <div className='col-span-3 pt-4 lg:ml-5 ml-0'>
+        <h2 className='mb-5 font-bold tracking-wider'>
+          Apple Watch | <span>{model}</span>
+        </h2>
+        <p className='md:text-lg tracking-wider text-gray-800 mb-5'>{name}</p>
+        <p className='mb-2 font-semibold tracking-widest text-gray-800 text-lg'>
+          £{price}.00
+        </p>
+        <div className='mb-3'>
+          <Link href='/'>
+            <a className='underline font-thin text-sm text-gray-700'>
+              Free Delivery & Returns (Ts & Cs apply)
+            </a>
+          </Link>
+        </div>
+        {instock ? (
+          <p className='text-green-600 mb-3'>In stock</p>
+        ) : (
+          <p className='text-red-600 mb-3'>Out of stock</p>
+        )}
+        <Markdown
+          className='mb-5 tracking-wide'
+          source={description.markdown}
+        />
+        <div className='flex items-center justify-between'>
+          <button
+            onClick={() => addToBasket(product)}
+            className='btn_add_to_basket'>
+            ADD TO BAG
+          </button>
+          <span className='saved-btn'>
+            {isHovered ? (
+              <BsHeartFill className='' size={20} />
+            ) : (
+              <BsHeart className='' size={20} />
+            )}
+          </span>
         </div>
       </div>
     </div>

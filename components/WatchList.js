@@ -37,11 +37,16 @@ const WatchList = ({ products }) => {
               <p className='mb-20 pt-5'>{name}</p>
               <div className='flex justify-between items-center absolute w-11/12 bottom-3'>
                 <p className='font-medium'>£{price}</p>
-                <Button
-                  onClick={() => addToBasket(product.node)}
-                  className='btn-indigo add_to_basket'>
-                  ADD TO BAG
-                </Button>
+                <motion.div
+                  initial={{ y: 500 }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 2 }}>
+                  <button
+                    onClick={() => addToBasket(product.node)}
+                    className='btn-green add_to_basket'>
+                    ADD TO BAG
+                  </button>
+                </motion.div>
                 <span className='saved-btn'>
                   {isHovered ? (
                     <BsHeartFill className='' size={20} />
@@ -63,15 +68,13 @@ export default WatchList;
 const WatchGridStyles = styled.div``;
 
 const Watch = styled(motion.div)`
-  .add_to_basket {
+  /* .add_to_basket {
     display: none;
-  }
+  } */
 
   :hover .add_to_basket {
     display: block;
   }
 `;
-
-const Button = styled(motion.div)``;
 
 const ImageDiv = styled(motion.div)``;

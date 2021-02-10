@@ -31,7 +31,7 @@ const RelatedWatches = () => {
       <h1 className=' font-bold mb-3 tracking-wide uppercase text-gray-800'>
         You Might Also Like
       </h1>
-      <div className='grid grid-cols-4 border border-gray-500 sm:p-10 p-5'>
+      <div className='grid grid-cols-4  sm:p-10 p-5'>
         {data ? (
           data.map((product) => {
             const { name, id, images, price, slug } = product;
