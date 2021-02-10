@@ -3,6 +3,7 @@ import {
   ADD_TO_VIEWED_ITEMS,
   REMOVE_FROM_BASKET,
   INCREASE,
+  SAVE_FOR_LATER,
 } from 'types';
 
 // const Storage = (basket) => {
@@ -52,8 +53,19 @@ const productReducer = (state, action) => {
         ],
       };
 
-    // INCREASE
+    // SAVE ITEM FOR LATER
+    case SAVE_FOR_LATER:
+      if (!state.saved.find((item) => item.id === action.payload.id)) {
+        state?.saved.push({
+          ...action.payload,
+        });
+      }
+      return {
+        ...state,
+        saved: [...state.saved],
+      };
 
+    // INCREASE
     case INCREASE:
       state.basket[
         state.basket.findIndex(({ product }) => product.id === action.payload)

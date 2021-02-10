@@ -5,22 +5,15 @@ import { BsHeart, BsBag, BsPlus, BsExclamationSquare } from 'react-icons/bs';
 import { BiMinus } from 'react-icons/bi';
 import { VscChromeClose } from 'react-icons/vsc';
 import Image from 'next/image';
-import RemoveFromBaketFeedback from '@/components/RemoveFromBaketFeedback';
 import { useSnackbar } from 'react-simple-snackbar';
-
-const deleteOptions = {
-  position: 'bottom-right',
-  style: {
-    backgroundColor: 'red',
-    border: '2px solid lightgreen',
-    color: 'white',
-    fontSize: '20px',
-    textAlign: 'center',
-  },
-};
+import EmptyBasket from '@/components/EmptyBasket';
+import Link from 'next/link';
+import Checkout from '@/components/Checkout';
+import { motion } from 'framer-motion';
+import { SAVE_FOR_LATER } from 'types';
 
 const Basket = () => {
-  const [openSnackbar, closeSnackbar] = useSnackbar(deleteOptions);
+  const [openSnackbar, closeSnackbar] = useSnackbar();
 
   const {
     basket,
@@ -28,16 +21,20 @@ const Basket = () => {
     isDeleted,
     increase,
     decrease,
+    saveForLater,
+    saved,
   } = useStateProvider();
-
-  console.log(basket);
 
   return (
     <Layout>
       {basket.length !== 0 ? (
-        <div className='max-w-6xl mx-auto'>
-          <div className='grid grid-cols-3 gap-4'>
-            <div className='col-span-2 bg-white shadow'>
+        <div className='max-w-7xl mx-auto px-8'>
+          <div className='md:grid grid-cols-3 gap-4'>
+            <motion.div
+              initial={{ x: -500 }}
+              animate={{ x: 0 }}
+              transition={{ duration: 0.8 }}
+              className='col-span-2 bg-white shadow'>
               <span className='flex justify-between items-center px-8 py-10'>
                 <h1 className='font-semibold text-lg tracking-wider text-gray-700'>
                   MY BAG
@@ -48,29 +45,36 @@ const Basket = () => {
               </span>
               <hr />
               {basket.map(({ product, quantity }) => {
-                const { price, name, images, id } = product;
+                const { price, name, images, id, slug } = product;
                 return (
                   <div className='flex py-5 border-b mx-5 relative' key={id}>
                     <div>
-                      <Image
-                        src={images[0].url}
-                        alt={name}
-                        width={200}
-                        height={200}
-                      />
+                      <Link href={`/product/${slug}`}>
+                        <a>
+                          <Image
+                            src={images[0].url}
+                            alt={name}
+                            width={200}
+                            height={200}
+                          />
+                        </a>
+                      </Link>
                     </div>
                     <div className='flex flex-col space-y-5'>
                       <h2 className='font-semibold tracking-wider text-gray-800 text-lg'>
                         £ {price}. 00
                       </h2>
-                      <p className='text-gray-600'>{name}</p>
+                      <Link href={`/product/${slug}`}>
+                        <a className='text-gray-600 hover:text-blue-400'>
+                          {name}
+                        </a>
+                      </Link>
                       <span className='inline-flex items center space-x-6'>
                         <button
                           onClick={() => {
                             decrease(id);
                             if (quantity < 2) {
                               removeFromBasket(id);
-                              openSnackbar('Item deleted');
                             }
                           }}
                           className={`border px-2 hover:bg-gray-200 border-gray-400 rounded`}>
@@ -88,16 +92,21 @@ const Basket = () => {
                           A maximum of 5 items are allowed at a time!
                         </p>
                       )}
-                      <button className='flex w-40 items-center space-x-2 border py-2 text-gray-700 px-4'>
+                      <button
+                        onClick={() => {
+                          removeFromBasket(id);
+                          saveForLater(product);
+                          openSnackbar('Item added to wish list');
+                        }}
+                        className='flex w-40 items-center space-x-2 border py-2 text-gray-700 hover:bg-gray-300 px-4'>
                         <BsHeart />
                         <p>Save for later</p>
                       </button>
                       <button
                         onClick={() => {
                           removeFromBasket(id);
-                          openSnackbar('Item deleted');
                         }}
-                        className='absolute top-5 right-5'>
+                        className='absolute md:top-5 md:right-5 right-0 top-0'>
                         <VscChromeClose size={26} />
                       </button>
                     </div>
@@ -108,26 +117,18 @@ const Basket = () => {
                 <span className=''>SUB-TOTAL</span>
                 <span>£95.00</span>
               </div>
-            </div>
-            <div className='col-span-1 bg-white shadow h-96'></div>
+            </motion.div>
+            <motion.div
+              initial={{ x: 500 }}
+              animate={{ x: 0 }}
+              transition={{ duration: 0.8 }}
+              className='col-span-1 bg-white shadow h-96 px-8'>
+              <Checkout />
+            </motion.div>
           </div>
         </div>
       ) : (
-        <div className='flex justify-center items-center justify-items-center inset-0'>
-          <div className='max-w-md mx-auto text-center'>
-            <div className='mb-8 flex justify-center items-center'>
-              <BsBag size={30} />
-            </div>
-            <p className='font-semibold text-lg tracking-wider mb-8 text-gray-800'>
-              Your bag is currently empty
-            </p>
-            <p className='text-lg text-gray-800 tracking-wide'>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum
-              eum similique ducimus perspiciatis unde ad ipsa libero
-              necessitatibus consectetur in?
-            </p>
-          </div>
-        </div>
+        <EmptyBasket />
       )}
     </Layout>
   );

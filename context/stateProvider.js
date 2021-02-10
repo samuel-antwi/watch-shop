@@ -5,9 +5,11 @@ import {
   DECREASE,
   INCREASE,
   REMOVE_FROM_BASKET,
+  SAVE_FOR_LATER,
 } from 'types';
 import productReducer from '../reducer/productReducer';
 import { StateContext } from './stateContext';
+import { useSnackbar } from 'react-simple-snackbar';
 
 const initialState = {
   basket: [],
@@ -16,18 +18,22 @@ const initialState = {
 };
 
 export const StateProvider = ({ children }) => {
+  const [openSnackbar] = useSnackbar();
   const [state, dispatch] = useReducer(productReducer, initialState);
   const [durationNotification, setDurationNotification] = useState(true);
   const [showMiniBasket, setMiniBasket] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
+    () => {
+      const localData = localStorage.getItem('state');
+      return localData ? JSON.parse(localData) : initialState;
+    };
+  });
+
+  useEffect(() => {
     window.localStorage.setItem('state', JSON.stringify(state));
   }, [state]);
-
-  // useEffect(() => {
-  //   window.localStorage.setItem('state', JSON.stringify(state));
-  // }, [state]);
 
   // Add product to basket
   const addToBasket = (product) => {
@@ -55,6 +61,15 @@ export const StateProvider = ({ children }) => {
       type: REMOVE_FROM_BASKET,
       payload: id,
     });
+    openSnackbar('Item deleted');
+  };
+
+  const saveForLater = (product) => {
+    dispatch({
+      type: SAVE_FOR_LATER,
+      payload: product,
+    });
+    openSnackbar('Item saved for later');
   };
 
   const increase = (payload) => {
@@ -65,11 +80,18 @@ export const StateProvider = ({ children }) => {
     dispatch({ type: DECREASE, payload });
   };
 
+  const isSaved = (id) => {
+    if (state.saved.find((product) => product.id === id)) {
+      return true;
+    }
+  };
+
   return (
     <StateContext.Provider
       value={{
         basket: state.basket,
         viewedItems: state.viewedItems,
+        saved: state.saved,
         addToBasket,
         addToViewedItems,
         durationNotification,
@@ -77,10 +99,12 @@ export const StateProvider = ({ children }) => {
         showMiniBasket,
         setMiniBasket,
         removeFromBasket,
+        saveForLater,
         isDeleted,
         setIsDeleted,
         increase,
         decrease,
+        isSaved,
       }}>
       {children}
     </StateContext.Provider>

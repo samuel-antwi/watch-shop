@@ -10,8 +10,8 @@ import Image from 'next/image';
 
 const WatchDetail = ({ product }) => {
   const [imageIndex, setImageIndex] = useState(0);
-  const { addToBasket } = useStateProvider();
-  const [isHovered, setIsHovered] = useState(false);
+  const { addToBasket, isSaved, saveForLater } = useStateProvider();
+
   const {
     name,
     images,
@@ -73,17 +73,23 @@ const WatchDetail = ({ product }) => {
         />
         <div className='flex items-center justify-between'>
           <button
+            disabled={!instock}
             onClick={() => addToBasket(product)}
-            className='btn_add_to_basket'>
-            ADD TO BAG
+            className={`${
+              instock ? 'btn_add_to_basket' : 'detail-btn_out-of-stock'
+            }`}>
+            {instock ? '  ADD TO BAG' : 'OUT OF STOCK'}
           </button>
-          <span className='saved-btn'>
-            {isHovered ? (
+          <button
+            onClick={() => saveForLater(product)}
+            disabled={isSaved(id)}
+            className='saved-btn'>
+            {isSaved(id) ? (
               <BsHeartFill className='' size={20} />
             ) : (
               <BsHeart className='' size={20} />
             )}
-          </span>
+          </button>
         </div>
       </div>
     </div>
@@ -122,13 +128,3 @@ export const PrevArrow = ({ imageIndex, setImageIndex }) => {
     </button>
   );
 };
-
-{
-  /* <Slide autoplay={false} infinite={false}>
-  {images.map((image) => (
-    <div key={image.id}>
-      <img src={image.url} alt={name} />
-    </div>
-  ))}
-</Slide>; */
-}

@@ -11,6 +11,7 @@ export const ALL_WATCHES = gql`
           name
           slug
           price
+          instock
           images {
             url
           }

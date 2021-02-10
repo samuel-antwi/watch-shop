@@ -7,14 +7,17 @@ import { motion } from 'framer-motion';
 import { useStateProvider } from '../context/stateProvider';
 
 const WatchList = ({ products }) => {
-  const { addToBasket, basket } = useStateProvider();
-  const { addToViewedItems } = useStateProvider();
-  const [isHovered, setIsHovered] = useState(false);
+  const {
+    addToBasket,
+    addToViewedItems,
+    saveForLater,
+    isSaved,
+  } = useStateProvider();
 
   return (
     <WatchGridStyles className='grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-5'>
       {products.map((product) => {
-        const { images, name, price, id, slug } = product.node;
+        const { images, name, price, id, slug, instock } = product.node;
         return (
           <Watch
             key={id}
@@ -28,6 +31,7 @@ const WatchList = ({ products }) => {
                     height={200}
                     layout='responsive'
                     alt={name}
+                    loading='eager'
                   />
                 </ImageDiv>
               </a>
@@ -42,18 +46,27 @@ const WatchList = ({ products }) => {
                   animate={{ y: 0 }}
                   transition={{ duration: 2 }}>
                   <button
+                    disabled={!instock}
                     onClick={() => addToBasket(product.node)}
-                    className='btn-green add_to_basket'>
-                    ADD TO BAG
+                    className={`${
+                      instock ? 'btn-green' : 'btn-out-of-stock'
+                    } add_to_basket`}>
+                    {instock ? 'ADD TO BAG' : 'OUT OF STOCK'}
                   </button>
                 </motion.div>
-                <span className='saved-btn'>
-                  {isHovered ? (
-                    <BsHeartFill className='' size={20} />
+                <button
+                  disabled={isSaved(id)}
+                  onClick={() => {
+                    saveForLater(product.node);
+                    // openSnackbar('Item saved for later');
+                  }}
+                  className='saved-btn'>
+                  {isSaved(id) ? (
+                    <BsHeartFill size={20} />
                   ) : (
-                    <BsHeart className='' size={20} />
+                    <BsHeart size={20} />
                   )}
-                </span>
+                </button>
               </div>
             </div>
           </Watch>
