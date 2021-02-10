@@ -14,6 +14,11 @@ const Nav = () => {
   const watchesRouter = router.pathname === '/';
   const strapsRouter = router.pathname === '/straps';
 
+  // Show miniBasket when the bag icon is hovered
+  const showMiniBasketOnHover = () => {
+    router.pathname !== '/basket' ? setMiniBasket(true) : null;
+  };
+
   return (
     <>
       {showMiniBasket && <MiniBasket />}
@@ -62,7 +67,7 @@ const Nav = () => {
               <div className=' px-10 cursor-pointer'>
                 <div
                   className='relative'
-                  onMouseEnter={() => setMiniBasket(true)}>
+                  onMouseEnter={() => showMiniBasketOnHover()}>
                   <span>
                     {!basket.length ? (
                       <BsBag size={25} />
@@ -89,9 +94,13 @@ const Nav = () => {
 export default Nav;
 
 export const MiniNav = () => {
+  const { showMiniBasket } = useStateProvider();
   const [isOpen, setOpen] = useState(false);
   return (
-    <div className='bg-secondary p-5 text-gray-100 z-10'>
+    <div
+      className={`${
+        !showMiniBasket ? 'bg-green-600' : 'bg-secondary'
+      } p-5 text-gray-100 z-10`}>
       <div className='hidden sm:block'>
         <div className='container flex justify-between items-center space-x-4'>
           <Link href='/'>

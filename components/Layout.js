@@ -9,7 +9,9 @@ const Layout = ({ title, children }) => {
     <>
       <div
         className={`font-futura ${
-          router.pathname === '/' || '/basket' ? 'bg-site' : 'bg-white'
+          router.pathname === '/' || router.pathname === '/basket'
+            ? 'bg-site'
+            : 'bg-white'
         }`}>
         <Nav />
         <Head>{title}</Head>

@@ -19,6 +19,7 @@
     "react-icons": "^4.1.0",
     "react-markdown": "^5.0.3",
     "react-query": "^3.6.0",
+    "react-simple-snackbar": "^1.1.10",
     "react-slideshow-image": "^3.4.3",
     "styled-components": "^5.2.1"
   },

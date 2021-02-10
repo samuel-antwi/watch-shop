@@ -32,8 +32,8 @@
 
 /* Extracted css component */
 @layer components {
-  .btn-indigo {
-    @apply py-2 text-xs px-4 cursor-pointer bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75;
+  .btn-green {
+    @apply py-2 text-xs px-4 cursor-pointer bg-green-500 text-white font-semibold  shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75;
   }
   .saved-btn {
     @apply bg-gray-200 rounded-full cursor-pointer h-10 w-10 flex items-center justify-center;
