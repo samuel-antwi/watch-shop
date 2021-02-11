@@ -7,7 +7,7 @@ const EmptyBasket = () => {
   const router = useRouter();
   const { saved } = useStateProvider();
   return (
-    <div className='flex flex-col justify-center items-center '>
+    <div className='flex flex-col justify-center items-center pt-10 '>
       <div className='max-w-md mx-auto text-center'>
         <div className='mb-8 flex justify-center items-center'>
           <BsBag size={30} />

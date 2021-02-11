@@ -9,7 +9,7 @@ import MiniBasket from './miniBasket/MiniBasket';
 import MiniNav from './MiniNav';
 
 const Nav = () => {
-  const { basket, setMiniBasket, showMiniBasket, saved } = useStateProvider();
+  const { basket, setMiniBasket, showMiniBasket, saved, itemCount } = useStateProvider();
   const router = useRouter();
   const watchesRouter = router.pathname === '/';
   const strapsRouter = router.pathname === '/straps';
@@ -34,9 +34,7 @@ const Nav = () => {
                   <Link href='/'>
                     <a
                       className={`md:text-xl font-bold py-6 px-10 tracking-wide ${
-                        watchesRouter
-                          ? 'bg-secondary'
-                          : 'border-l border-gray-300'
+                        watchesRouter ? 'bg-secondary' : 'border-l border-gray-300'
                       }`}>
                       Watches
                     </a>
@@ -44,9 +42,7 @@ const Nav = () => {
                   <Link href='/straps'>
                     <a
                       className={`md:text-xl font-bold py-6 px-10 tracking-wide ${
-                        strapsRouter
-                          ? 'bg-secondary'
-                          : 'border-r border-gray-300'
+                        strapsRouter ? 'bg-secondary' : 'border-r border-gray-300'
                       }`}>
                       Straps
                     </a>
@@ -59,17 +55,10 @@ const Nav = () => {
               <div className='px-5'>
                 <RiUser2Fill size={25} />
               </div>
-              {/* <Link href='/saved-items'>
-                <a>
-                  <BsHeart size={25} />
-                </a>
-              </Link> */}
               <div className=' px-5 cursor-pointer'>
                 <div
                   className='relative'
-                  onClick={() =>
-                    basket.length === 0 ? router.push('/saved-items') : null
-                  }>
+                  onClick={() => (saved.length !== 0 ? router.push('/saved-items') : null)}>
                   <span>
                     {!saved.length ? (
                       <BsHeart size={25} />
@@ -88,19 +77,11 @@ const Nav = () => {
                 <div
                   className='relative'
                   onMouseEnter={() => showMiniBasketOnHover()}
-                  onClick={() =>
-                    basket.length === 0 ? router.push('/basket') : null
-                  }>
-                  <span>
-                    {!basket.length ? (
-                      <BsBag size={25} />
-                    ) : (
-                      <BsBagFill size={25} />
-                    )}
-                  </span>
+                  onClick={() => (basket.length === 0 ? router.push('/basket') : null)}>
+                  <span>{!basket.length ? <BsBag size={25} /> : <BsBagFill size={25} />}</span>
                   {basket.length !== 0 && (
                     <span className=' text-center  text-xs font-medium '>
-                      <p className='text-gray-800 -mt-4'>{basket.length}</p>
+                      <p className='text-gray-800 -mt-4'>{itemCount}</p>
                     </span>
                   )}
                 </div>

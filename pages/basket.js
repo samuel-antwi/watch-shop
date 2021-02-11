@@ -13,7 +13,8 @@ import { motion } from 'framer-motion';
 import { SAVE_FOR_LATER } from 'types';
 
 const Basket = () => {
-  const [openSnackbar, closeSnackbar] = useSnackbar();
+  const [openSnackbar] = useSnackbar();
+  const { total } = useStateProvider();
 
   const {
     basket,
@@ -28,7 +29,7 @@ const Basket = () => {
   return (
     <Layout>
       {basket.length !== 0 ? (
-        <div className='max-w-7xl mx-auto px-8'>
+        <div className='max-w-7xl mx-auto px-8 pt-10'>
           <div className='md:grid grid-cols-3 gap-4'>
             <motion.div
               initial={{ x: -500 }}
@@ -36,27 +37,18 @@ const Basket = () => {
               transition={{ duration: 0.8 }}
               className='col-span-2 bg-white shadow'>
               <span className='flex justify-between items-center px-8 py-10'>
-                <h1 className='font-semibold text-lg tracking-wider text-gray-700'>
-                  MY BAG
-                </h1>
-                <p className='text-gray-700'>
-                  Items are reserved for 60 minutes
-                </p>
+                <h1 className='font-semibold text-lg tracking-wider text-gray-700'>MY BAG</h1>
+                <p className='text-gray-700'>Items are reserved for 60 minutes</p>
               </span>
               <hr />
-              {basket.map(({ product, quantity }) => {
-                const { price, name, images, id, slug } = product;
+              {basket.map((product) => {
+                const { price, name, images, id, slug, quantity } = product;
                 return (
                   <div className='flex py-5 border-b mx-5 relative' key={id}>
                     <div>
                       <Link href={`/product/${slug}`}>
                         <a>
-                          <Image
-                            src={images[0].url}
-                            alt={name}
-                            width={200}
-                            height={200}
-                          />
+                          <Image src={images[0].url} alt={name} width={200} height={200} />
                         </a>
                       </Link>
                     </div>
@@ -65,9 +57,7 @@ const Basket = () => {
                         £ {price}. 00
                       </h2>
                       <Link href={`/product/${slug}`}>
-                        <a className='text-gray-600 hover:text-blue-400'>
-                          {name}
-                        </a>
+                        <a className='text-gray-600 hover:text-blue-400'>{name}</a>
                       </Link>
                       <span className='inline-flex items center space-x-6'>
                         <button
@@ -96,7 +86,6 @@ const Basket = () => {
                         onClick={() => {
                           removeFromBasket(id);
                           saveForLater(product);
-                          openSnackbar('Item added to wish list');
                         }}
                         className='flex w-40 items-center space-x-2 border py-2 text-gray-700 hover:bg-gray-300 px-4'>
                         <BsHeart />
@@ -115,7 +104,7 @@ const Basket = () => {
               })}
               <div className='flex justify-end py-10 px-8 space-x-6 font-semibold tracking-wider text-gray-800'>
                 <span className=''>SUB-TOTAL</span>
-                <span>£95.00</span>
+                <span>£{total}</span>
               </div>
             </motion.div>
             <motion.div

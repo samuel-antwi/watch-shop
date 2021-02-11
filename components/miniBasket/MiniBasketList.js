@@ -11,8 +11,8 @@ const MiniBasketList = () => {
   const { basket } = useStateProvider();
   return basket.length !== 0 ? (
     <div className='max-h-100 overflow-scroll'>
-      {basket?.map(({ product, quantity }) => {
-        const { name, images, price, id, slug } = product;
+      {basket?.map((product) => {
+        const { name, images, price, id, slug, quantity } = product;
         return (
           <Link href={`/product/${slug}`} key={id}>
             <a>

@@ -3,7 +3,7 @@ import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
 import { useStateProvider } from 'context/stateProvider';
 
 const MiniBasketHeader = () => {
-  const { basket, durationNotification, setMiniBasket } = useStateProvider();
+  const { basket, durationNotification, setMiniBasket, itemCount } = useStateProvider();
   return (
     <div>
       <div className='bg-gray-200'>
@@ -13,7 +13,7 @@ const MiniBasketHeader = () => {
             {basket.length <= 1 ? (
               <span className='font-normal ml-2'>1 item</span>
             ) : (
-              <span className='font-normal ml-2'>{basket.length} items</span>
+              <span className='font-normal ml-2'>{itemCount} items</span>
             )}
           </p>
           <button onClick={() => setMiniBasket(false)}>
@@ -24,9 +24,7 @@ const MiniBasketHeader = () => {
       {durationNotification && (
         <div className='flex items-center p-2 bg-green-100'>
           <IoIosCheckmarkCircleOutline size={20} className=' text-green-700' />
-          <p className=' text-gray-700 ml-3'>
-            It's in the bag - We'll hold it for 2 hours
-          </p>
+          <p className=' text-gray-700 ml-3'>It's in the bag - We'll hold it for 2 hours</p>
         </div>
       )}
     </div>

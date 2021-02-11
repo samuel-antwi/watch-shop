@@ -1,7 +1,9 @@
+import { useStateProvider } from 'context/stateProvider';
 import { motion } from 'framer-motion';
 import { BsExclamationCircle } from 'react-icons/bs';
 
 const Checkout = () => {
+  const { total } = useStateProvider();
   return (
     <div>
       <h1 className='font-bold text-gray-800 tracking-widest py-10'>TOTAL</h1>
@@ -9,7 +11,7 @@ const Checkout = () => {
       <div className='py-4'>
         <div className='flex items-center justify-between mb-3'>
           <h1 className='font-semibold tracking-widest'>Sub-total</h1>
-          <p>£30.00</p>
+          <p className='font-semibold tracking-wider'>£{total}</p>
         </div>
         <div className='flex items-center justify-between mb-5'>
           <h1 className='font-semibold tracking-widest'>Delivery</h1>
@@ -17,16 +19,10 @@ const Checkout = () => {
         </div>
         <select name='' id=''>
           <option value='next-day'>Next-Day Delivery (Free)</option>
-          <option value='click and collect standard'>
-            Click & Collect Standard (Free)
-          </option>
-          <option value='click and collect next-day'>
-            Click & Collect Next-Day (Free)
-          </option>
+          <option value='click and collect standard'>Click & Collect Standard (Free)</option>
+          <option value='click and collect next-day'>Click & Collect Next-Day (Free)</option>
           <option value='standard delivery'>Standard Delivery (Free)</option>
-          <option value='same-day delivery'>
-            Same Day Delivery(Order before 2pm - Free)
-          </option>
+          <option value='same-day delivery'>Same Day Delivery(Order before 2pm - Free)</option>
         </select>
       </div>
       <hr />

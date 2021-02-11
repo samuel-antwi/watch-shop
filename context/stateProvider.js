@@ -5,6 +5,7 @@ import {
   DECREASE,
   INCREASE,
   REMOVE_FROM_BASKET,
+  REMOVE_FROM_SAVED_ITEMS,
   SAVE_FOR_LATER,
 } from 'types';
 import productReducer from '../reducer/productReducer';
@@ -40,11 +41,11 @@ export const StateProvider = ({ children }) => {
     window.scrollTo(0, 0);
     dispatch({
       type: ADD_TO_BASKET,
-      payload: { product },
+      payload: product,
     });
     setMiniBasket(true);
     setDurationNotification(true);
-    setTimeout(() => setMiniBasket(false), 4000);
+    // setTimeout(() => setMiniBasket(false), 4000);
     setTimeout(() => setDurationNotification(false), 40000);
   };
 
@@ -56,12 +57,22 @@ export const StateProvider = ({ children }) => {
     });
   };
 
+  // REMOVE FROM BASKET
   const removeFromBasket = (id) => {
     dispatch({
       type: REMOVE_FROM_BASKET,
       payload: id,
     });
     openSnackbar('Item deleted');
+  };
+
+  // REMOVE FROM SAVED ITEMS
+  const removeFromSavedItems = (id) => {
+    dispatch({
+      type: REMOVE_FROM_SAVED_ITEMS,
+      payload: id,
+    });
+    // openSnackbar('Item deleted');
   };
 
   const saveForLater = (product) => {
@@ -86,12 +97,20 @@ export const StateProvider = ({ children }) => {
     }
   };
 
+  const inBasket = (id) => {
+    if (state.basket.find((product) => product.id === id)) {
+      return true;
+    }
+  };
+
   return (
     <StateContext.Provider
       value={{
         basket: state.basket,
         viewedItems: state.viewedItems,
         saved: state.saved,
+        total: state.total,
+        itemCount: state.itemCount,
         addToBasket,
         addToViewedItems,
         durationNotification,
@@ -99,12 +118,14 @@ export const StateProvider = ({ children }) => {
         showMiniBasket,
         setMiniBasket,
         removeFromBasket,
+        removeFromSavedItems,
         saveForLater,
         isDeleted,
         setIsDeleted,
         increase,
         decrease,
         isSaved,
+        inBasket,
       }}>
       {children}
     </StateContext.Provider>

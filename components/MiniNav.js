@@ -10,12 +10,12 @@ const MiniNav = () => {
   return (
     <div
       className={`${
-        !showMiniBasket ? 'bg-green-600' : 'bg-secondary'
+        !showMiniBasket ? ' bg-mini_nav_sale' : 'bg-secondary'
       } p-5 text-gray-100 z-10`}>
       <div className='hidden sm:block'>
         <div className='container flex justify-between items-center space-x-4'>
           <Link href='/'>
-            <a className='uppercase font-bold py-1.5 px-5 text-gray-100 tracking-wider border-2 border-gray-100'>
+            <a className='uppercase font-bold py-1 px-5 text-gray-100 tracking-wider border-2 border-gray-100'>
               watches
             </a>
           </Link>
@@ -24,7 +24,7 @@ const MiniNav = () => {
             <span className='font-bold tracking-wider'>SABUTOWATCHES</span>
           </p>
           <Link href='/straps'>
-            <a className='uppercase font-bold py-1.5 px-5 text-gray-100 tracking-wider border-2 border-gray-100'>
+            <a className='uppercase font-bold py-1 px-5 text-gray-100 tracking-wider border-2 border-gray-100'>
               straps
             </a>
           </Link>
@@ -35,12 +35,7 @@ const MiniNav = () => {
           <Link href='/'>
             <a className='text-2xl font-bold'>iwatches</a>
           </Link>
-          <Hamburger
-            duration={0.8}
-            size={25}
-            toggled={isOpen}
-            toggle={setOpen}
-          />
+          <Hamburger duration={0.8} size={25} toggled={isOpen} toggle={setOpen} />
         </div>
       </div>
     </div>

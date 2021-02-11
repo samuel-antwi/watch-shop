@@ -34,7 +34,7 @@
 @layer components {
   /* Watch list */
   .btn-green {
-    @apply py-2 text-xs px-4 cursor-pointer bg-green-600 tracking-widest text-white font-semibold  shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75;
+    @apply py-2 text-xs px-4 cursor-pointer bg-btn_green_bg tracking-widest text-white font-semibold  shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75;
   }
   .btn-out-of-stock {
     @apply py-2 text-xs px-4 bg-red-400 tracking-widest cursor-default text-white font-semibold  shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75;
@@ -46,7 +46,7 @@
 
   /* Watch detail */
   .btn_add_to_basket {
-    @apply bg-green-600 flex-1 mr-5  text-white text-sm font-semibold tracking-wider py-3 hover:bg-green-700 focus:ring-opacity-75 focus:ring-green-400 focus:outline-none;
+    @apply bg-btn_green_bg flex-1 mr-5  text-white text-sm font-semibold tracking-wider py-3 hover:bg-green-700 focus:ring-opacity-75 focus:ring-green-400 focus:outline-none;
   }
   .detail-btn_out-of-stock {
     @apply bg-red-200 flex-1 mr-5 cursor-default  text-white text-sm font-semibold tracking-wider py-3  focus:ring-opacity-75 focus:ring-red-400 focus:outline-none;

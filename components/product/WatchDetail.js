@@ -10,19 +10,10 @@ import Image from 'next/image';
 
 const WatchDetail = ({ product }) => {
   const [imageIndex, setImageIndex] = useState(0);
-  const { addToBasket, isSaved, saveForLater } = useStateProvider();
+  const { addToBasket, isSaved, saveForLater, increase, inBasket } = useStateProvider();
 
-  const {
-    name,
-    images,
-    id,
-    slug,
-    description,
-    instock,
-    model,
-    price,
-    reviews,
-  } = product;
+  const { name, images, id, slug, description, instock, model, price, reviews } = product;
+
   return (
     <div className='md:grid md:grid-cols-7 lg:gap-10 gap-5'>
       <div className='col-span-1 pt-4 -mr-5 hidden md:block'>
@@ -37,13 +28,7 @@ const WatchDetail = ({ product }) => {
       <div className='col-span-3 md:mr-10'>
         <div className='inline-flex items-center'>
           <PrevArrow imageIndex={imageIndex} setImageIndex={setImageIndex} />
-          <Image
-            src={images[imageIndex].url}
-            alt={name}
-            width={500}
-            height={500}
-            priority={true}
-          />
+          <Image src={images[imageIndex].url} alt={name} width={500} height={500} priority={true} />
           <NextArrow imageIndex={imageIndex} setImageIndex={setImageIndex} />
         </div>
       </div>
@@ -52,9 +37,7 @@ const WatchDetail = ({ product }) => {
           Apple Watch | <span>{model}</span>
         </h2>
         <p className='md:text-lg tracking-wider text-gray-800 mb-5'>{name}</p>
-        <p className='mb-2 font-semibold tracking-widest text-gray-800 text-lg'>
-          £{price}.00
-        </p>
+        <p className='mb-2 font-semibold tracking-widest text-gray-800 text-lg'>£{price}.00</p>
         <div className='mb-3'>
           <Link href='/'>
             <a className='underline font-thin text-sm text-gray-700'>
@@ -67,17 +50,18 @@ const WatchDetail = ({ product }) => {
         ) : (
           <p className='text-red-600 mb-3'>Out of stock</p>
         )}
-        <Markdown
-          className='mb-5 tracking-wide'
-          source={description.markdown}
-        />
+        <Markdown className='mb-5 tracking-wide' source={description.markdown} />
         <div className='flex items-center justify-between'>
           <button
             disabled={!instock}
-            onClick={() => addToBasket(product)}
-            className={`${
-              instock ? 'btn_add_to_basket' : 'detail-btn_out-of-stock'
-            }`}>
+            onClick={() => {
+              if (inBasket(id)) {
+                return increase(id);
+              } else {
+                return addToBasket(product);
+              }
+            }}
+            className={`${instock ? 'btn_add_to_basket' : 'detail-btn_out-of-stock'}`}>
             {instock ? '  ADD TO BAG' : 'OUT OF STOCK'}
           </button>
           <button
@@ -105,9 +89,7 @@ export const NextArrow = ({ imageIndex, setImageIndex }) => {
       className=''
       disabled={imageIndex === 2}>
       <BsChevronRight
-        className={` ${
-          imageIndex === 2 ? 'text-gray-400 cursor-default' : 'text-gray-900'
-        }`}
+        className={` ${imageIndex === 2 ? 'text-gray-400 cursor-default' : 'text-gray-900'}`}
         size={30}
       />
     </button>
@@ -120,9 +102,7 @@ export const PrevArrow = ({ imageIndex, setImageIndex }) => {
       className=''
       disabled={imageIndex === 0}>
       <BsChevronLeft
-        className={`${
-          imageIndex === 0 ? 'text-gray-400 cursor-default' : 'text-gray-900'
-        }`}
+        className={`${imageIndex === 0 ? 'text-gray-400 cursor-default' : 'text-gray-900'}`}
         size={30}
       />
     </button>

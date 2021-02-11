@@ -4,6 +4,8 @@ import {
   REMOVE_FROM_BASKET,
   INCREASE,
   SAVE_FOR_LATER,
+  REMOVE_FROM_SAVED_ITEMS,
+  DECREASE,
 } from 'types';
 
 // const Storage = (basket) => {
@@ -11,10 +13,7 @@ import {
 // };
 
 export const sumItems = (basket) => {
-  let itemCount = basket.reduce(
-    (total, product) => total + product.quantity,
-    0
-  );
+  let itemCount = basket.reduce((total, product) => total + product.quantity, 0);
   let total = basket
     .reduce((total, product) => total + product.price * product.quantity, 0)
     .toFixed(2);
@@ -22,16 +21,11 @@ export const sumItems = (basket) => {
 };
 
 const productReducer = (state, action) => {
-  console.log(action.payload);
   switch (action.type) {
     // Add to basket
     case ADD_TO_BASKET:
-      if (
-        !state.basket.find(
-          (item) => item.product.id === action.payload.product.id
-        )
-      ) {
-        state?.basket.push({
+      if (!state.basket.find((item) => item.id === action.payload.id)) {
+        state.basket.push({
           ...action.payload,
           quantity: 1,
         });
@@ -46,11 +40,14 @@ const productReducer = (state, action) => {
     case REMOVE_FROM_BASKET:
       return {
         ...state,
-        basket: [
-          ...state.basket.filter(
-            ({ product }) => product.id !== action.payload
-          ),
-        ],
+        ...sumItems(state.basket.filter((item) => item.id !== action.payload)),
+        basket: [...state.basket.filter((item) => item.id !== action.payload)],
+      };
+
+    case REMOVE_FROM_SAVED_ITEMS:
+      return {
+        ...state,
+        saved: [...state.saved.filter((product) => product.id !== action.payload)],
       };
 
     // SAVE ITEM FOR LATER
@@ -65,34 +62,28 @@ const productReducer = (state, action) => {
         saved: [...state.saved],
       };
 
-    // INCREASE
+    // Increase basket quantity
     case INCREASE:
-      state.basket[
-        state.basket.findIndex(({ product }) => product.id === action.payload)
-      ].quantity++;
-
+      state.basket[state.basket.findIndex((product) => product.id === action.payload)].quantity++;
       return {
         ...state,
-        // ...sumItems(state.cartItems),
+        ...sumItems(state.basket),
         basket: [...state.basket],
       };
 
-    case 'DECREASE':
-      state.basket[
-        state.basket.findIndex(({ product }) => product.id === action.payload)
-      ].quantity--;
+    // Decreasse basket quantity
+    case DECREASE:
+      state.basket[state.basket.findIndex((product) => product.id === action.payload)].quantity--;
       return {
         ...state,
-        // ...sumItems(state.basket),
+        ...sumItems(state.basket),
         basket: [...state.basket],
       };
 
     // Add to recently viewed items
     case ADD_TO_VIEWED_ITEMS:
       if (
-        !state.viewedItems.find(
-          (item) => item.product.node.id === action.payload.product.node.id
-        )
+        !state.viewedItems.find((item) => item.product.node.id === action.payload.product.node.id)
       ) {
         state.viewedItems.push({
           ...action.payload,
