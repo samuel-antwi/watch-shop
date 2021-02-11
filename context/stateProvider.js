@@ -72,7 +72,7 @@ export const StateProvider = ({ children }) => {
       type: REMOVE_FROM_SAVED_ITEMS,
       payload: id,
     });
-    // openSnackbar('Item deleted');
+    openSnackbar('Item removed!');
   };
 
   const saveForLater = (product) => {
