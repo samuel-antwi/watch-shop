@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import { RiUser2Fill } from 'react-icons/ri';
-import { BsHeart, BsBag, BsBagFill } from 'react-icons/bs';
-import { useState } from 'react';
+import { BsHeart, BsBag, BsBagFill, BsHeartFill } from 'react-icons/bs';
 import { useRouter } from 'next/router';
 import { Turn as Hamburger } from 'hamburger-react';
 import SearchBar from './SearchBar';
 import { useStateProvider } from '../context/stateProvider';
 import MiniBasket from './miniBasket/MiniBasket';
+import MiniNav from './MiniNav';
 
 const Nav = () => {
-  const { basket, setMiniBasket, showMiniBasket } = useStateProvider();
+  const { basket, setMiniBasket, showMiniBasket, saved, itemCount } = useStateProvider();
   const router = useRouter();
   const watchesRouter = router.pathname === '/';
   const strapsRouter = router.pathname === '/straps';
@@ -34,9 +34,7 @@ const Nav = () => {
                   <Link href='/'>
                     <a
                       className={`md:text-xl font-bold py-6 px-10 tracking-wide ${
-                        watchesRouter
-                          ? 'bg-secondary'
-                          : 'border-l border-gray-300'
+                        watchesRouter ? 'bg-secondary' : 'border-l border-gray-300'
                       }`}>
                       Watches
                     </a>
@@ -44,9 +42,7 @@ const Nav = () => {
                   <Link href='/straps'>
                     <a
                       className={`md:text-xl font-bold py-6 px-10 tracking-wide ${
-                        strapsRouter
-                          ? 'bg-secondary'
-                          : 'border-r border-gray-300'
+                        strapsRouter ? 'bg-secondary' : 'border-r border-gray-300'
                       }`}>
                       Straps
                     </a>
@@ -56,28 +52,36 @@ const Nav = () => {
             </div>
             <SearchBar />
             <div className='right_links flex items-center'>
-              <div className='px-10'>
+              <div className='px-5'>
                 <RiUser2Fill size={25} />
               </div>
-              <Link href='/saved-items'>
-                <a>
-                  <BsHeart size={25} />
-                </a>
-              </Link>
-              <div className=' px-10 cursor-pointer'>
+              <div className=' px-5 cursor-pointer'>
                 <div
                   className='relative'
-                  onMouseEnter={() => showMiniBasketOnHover()}>
+                  onClick={() => (saved.length !== 0 ? router.push('/saved-items') : null)}>
                   <span>
-                    {!basket.length ? (
-                      <BsBag size={25} />
+                    {!saved.length ? (
+                      <BsHeart size={25} />
                     ) : (
-                      <BsBagFill size={25} />
+                      <BsHeartFill className='text-pink-700' size={25} />
                     )}
                   </span>
+                  {saved.length !== 0 && (
+                    <span className=' text-center  text-xs font-medium '>
+                      <p className='text-gray-100 -mt-5'>{saved.length}</p>
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className=' px-5 cursor-pointer'>
+                <div
+                  className='relative'
+                  onMouseEnter={() => showMiniBasketOnHover()}
+                  onClick={() => (basket.length === 0 ? router.push('/basket') : null)}>
+                  <span>{!basket.length ? <BsBag size={25} /> : <BsBagFill size={25} />}</span>
                   {basket.length !== 0 && (
                     <span className=' text-center  text-xs font-medium '>
-                      <p className='text-gray-800 -mt-4'>{basket.length}</p>
+                      <p className='text-gray-800 -mt-4'>{itemCount}</p>
                     </span>
                   )}
                 </div>
@@ -90,48 +94,4 @@ const Nav = () => {
     </>
   );
 };
-
 export default Nav;
-
-export const MiniNav = () => {
-  const { showMiniBasket } = useStateProvider();
-  const [isOpen, setOpen] = useState(false);
-  return (
-    <div
-      className={`${
-        !showMiniBasket ? 'bg-green-600' : 'bg-secondary'
-      } p-5 text-gray-100 z-10`}>
-      <div className='hidden sm:block'>
-        <div className='container flex justify-between items-center space-x-4'>
-          <Link href='/'>
-            <a className='uppercase font-bold py-1.5 px-5 text-gray-100 tracking-wider border-2 border-gray-100'>
-              watches
-            </a>
-          </Link>
-          <p className='text-center'>
-            Get 15% off everything when you spend £299 with code:{' '}
-            <span className='font-bold tracking-wider'>SABUTOWATCHES</span>
-          </p>
-          <Link href='/straps'>
-            <a className='uppercase font-bold py-1.5 px-5 text-gray-100 tracking-wider border-2 border-gray-100'>
-              straps
-            </a>
-          </Link>
-        </div>
-      </div>
-      <div className='sm:hidden'>
-        <div className='flex items-center justify-between text-gray-100'>
-          <Link href='/'>
-            <a className='text-2xl font-bold'>iwatches</a>
-          </Link>
-          <Hamburger
-            duration={0.8}
-            size={25}
-            toggled={isOpen}
-            toggle={setOpen}
-          />
-        </div>
-      </div>
-    </div>
-  );
-};

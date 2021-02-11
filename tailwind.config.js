@@ -11,6 +11,8 @@ module.exports = {
         primary: '#2d2d2d',
         secondary: '#525050',
         site: '#f5f5f5',
+        mini_nav_sale: '#007a20',
+        btn_green_bg: '#008848',
       }),
       screens: {
         xxs: '280px',

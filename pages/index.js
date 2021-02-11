@@ -9,7 +9,7 @@ const Watches = ({ edges, pageInfo }) => {
 
   return (
     <Layout>
-      <div>
+      <div className='pt-10 container mx-auto px-10'>
         <WatchList products={edges} />
       </div>
     </Layout>

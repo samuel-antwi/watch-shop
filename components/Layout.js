@@ -15,7 +15,7 @@ const Layout = ({ title, children }) => {
         }`}>
         <Nav />
         <Head>{title}</Head>
-        <div className='max-w-7xl mx-auto py-20 min-h-screen'>{children}</div>
+        <div className='min-h-screen'>{children}</div>
       </div>
     </>
   );

@@ -14,11 +14,11 @@ const client = new QueryClient({
 function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={client}>
-      <StateProvider>
-        <SnackbarProvider>
+      <SnackbarProvider>
+        <StateProvider>
           <Component {...pageProps} />
-        </SnackbarProvider>
-      </StateProvider>
+        </StateProvider>
+      </SnackbarProvider>
     </QueryClientProvider>
   );
 }

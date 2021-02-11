@@ -1,9 +1,6 @@
-export const deleteOptions = {
+export const options = {
   style: {
-    backgroundColor: 'red',
-    border: '2px solid lightgreen',
-    color: 'white',
-    fontSize: '20px',
+    backgroundColor: 'white',
     textAlign: 'center',
   },
 };
