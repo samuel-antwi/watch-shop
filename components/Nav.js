@@ -11,7 +11,7 @@ import MiniNav from './MiniNav';
 const Nav = () => {
   const { basket, setMiniBasket, showMiniBasket, saved, itemCount } = useStateProvider();
   const router = useRouter();
-  const watchesRouter = router.pathname === '/';
+  const watchesRouter = router.pathname === '/watches';
   const strapsRouter = router.pathname === '/straps';
 
   // Show miniBasket when the bag icon is hovered
@@ -31,7 +31,7 @@ const Nav = () => {
               </Link>
               <div className='middle_links hidden xl:block'>
                 <div className='flex'>
-                  <Link href='/'>
+                  <Link href='/watches'>
                     <a
                       className={`md:text-xl font-bold py-6 px-10 tracking-wide ${
                         watchesRouter ? 'bg-secondary' : 'border-l border-gray-300'
@@ -55,24 +55,17 @@ const Nav = () => {
               <div className='px-5'>
                 <RiUser2Fill size={25} />
               </div>
-              <div className=' px-5 cursor-pointer'>
-                <div
-                  className='relative'
-                  onClick={() => (saved.length !== 0 ? router.push('/saved-items') : null)}>
+              <Link href='/saved-items'>
+                <a className=' px-5 cursor-pointer'>
                   <span>
                     {!saved.length ? (
                       <BsHeart size={25} />
                     ) : (
-                      <BsHeartFill className='text-pink-700' size={25} />
+                      <BsHeartFill className='text-gray-100' size={25} />
                     )}
                   </span>
-                  {saved.length !== 0 && (
-                    <span className=' text-center  text-xs font-medium '>
-                      <p className='text-gray-100 -mt-5'>{saved.length}</p>
-                    </span>
-                  )}
-                </div>
-              </div>
+                </a>
+              </Link>
               <div className=' px-5 cursor-pointer'>
                 <div
                   className='relative'
@@ -95,3 +88,13 @@ const Nav = () => {
   );
 };
 export default Nav;
+
+{
+  /* <div>
+  {saved.length !== 0 && (
+    <span className=' text-center  text-xs font-medium '>
+      <p className='text-gray-100 -mt-5'>{saved.length}</p>
+    </span>
+  )}
+</div>; */
+}

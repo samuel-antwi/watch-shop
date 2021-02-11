@@ -15,7 +15,7 @@ const WatchDetail = ({ product }) => {
   const { name, images, id, slug, description, instock, model, price, reviews } = product;
 
   return (
-    <div className='md:grid md:grid-cols-7 lg:gap-10 gap-5'>
+    <div className='md:grid md:grid-cols-7 lg:gap-10 gap-5 pt-10'>
       <div className='col-span-1 pt-4 -mr-5 hidden md:block'>
         {images.map((image, index) => (
           <div key={image.id}>

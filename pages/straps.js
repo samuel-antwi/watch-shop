@@ -5,7 +5,7 @@ const Straps = () => {
   return (
     <Layout>
       <div>
-        <h1>This are straps</h1>
+        <h1>These are straps</h1>
       </div>
     </Layout>
   );
