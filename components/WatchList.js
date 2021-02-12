@@ -11,7 +11,7 @@ const WatchList = ({ products }) => {
 
   return (
     <div className='grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-5'>
-      {products.map((product) => {
+      {products?.map((product) => {
         const { name, images, id, price, instock, slug } = product.node;
         return (
           <div className='bg-white relative' key={id}>
