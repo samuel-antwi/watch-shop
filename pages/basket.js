@@ -13,7 +13,6 @@ import { motion } from 'framer-motion';
 import { SAVE_FOR_LATER } from 'types';
 
 const Basket = () => {
-  const [openSnackbar] = useSnackbar();
   const {
     total,
     basket,
@@ -43,11 +42,13 @@ const Basket = () => {
               </span>
               <hr />
               <div className='flex text-center justify-center py-5'>
-                <button
-                  onClick={clearBasket}
-                  className='text-red-500 border border-red-600 px-2 py-1 rounded text-sm  uppercase font-medium tracking-wider'>
-                  Clear all
-                </button>
+                {basket.length > 1 && (
+                  <button
+                    onClick={clearBasket}
+                    className='text-red-500 border border-red-600 px-2 py-1 rounded text-sm  uppercase font-medium tracking-wider'>
+                    Clear all
+                  </button>
+                )}
               </div>
               {basket.map((product) => {
                 const { price, name, images, id, slug, quantity } = product;

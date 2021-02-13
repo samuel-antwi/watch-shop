@@ -14,7 +14,7 @@ const MiniNav = () => {
       } p-5 text-gray-100 z-10`}>
       <div className='hidden sm:block'>
         <div className='container flex justify-between items-center space-x-4'>
-          <Link href='/'>
+          <Link href='/watches'>
             <a className='uppercase font-bold py-1 px-5 text-gray-100 tracking-wider border-2 border-gray-100'>
               watches
             </a>
