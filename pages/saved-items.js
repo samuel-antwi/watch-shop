@@ -52,11 +52,13 @@ const SavedItems = () => {
                         ? 'border-green-600 text-gray-700'
                         : 'border-red-200 text-gray-300 cursor-default'
                     } border-2 w-full py-1 text-sm font-semibold tracking-widest`}>
-                    {instock && !inBasket(id)
-                      ? 'MOVE TO BAG'
-                      : !instock
-                      ? 'OUT OF STOCK'
-                      : 'IN BAG'}
+                    {instock && !inBasket(id) ? (
+                      'MOVE TO BAG'
+                    ) : !instock ? (
+                      'OUT OF STOCK'
+                    ) : (
+                      <span className='text-gray-400'>IN BAG</span>
+                    )}
                   </button>
                 </div>
               );

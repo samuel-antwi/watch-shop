@@ -7,6 +7,7 @@ import {
   REMOVE_FROM_SAVED_ITEMS,
   DECREASE,
   CLEAR,
+  CLEAR_RECENTLY_VIEWED,
 } from 'types';
 
 export const sumItems = (basket) => {
@@ -87,6 +88,14 @@ const productReducer = (state, action) => {
       return {
         ...state,
         viewedItems: [...state.viewedItems],
+      };
+
+    // Clear Recently viewed items
+
+    case CLEAR_RECENTLY_VIEWED:
+      return {
+        ...state,
+        viewedItems: [],
       };
 
     // Clear Basket

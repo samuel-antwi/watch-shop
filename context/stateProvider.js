@@ -8,6 +8,7 @@ import {
   REMOVE_FROM_SAVED_ITEMS,
   SAVE_FOR_LATER,
   CLEAR,
+  CLEAR_RECENTLY_VIEWED,
 } from 'types';
 import productReducer from '../reducer/productReducer';
 import { StateContext } from './stateContext';
@@ -51,6 +52,13 @@ export const StateProvider = ({ children }) => {
     dispatch({
       type: ADD_TO_VIEWED_ITEMS,
       payload: product,
+    });
+  };
+
+  // Clear recently viewed items
+  const clearViewedItems = () => {
+    dispatch({
+      type: CLEAR_RECENTLY_VIEWED,
     });
   };
 
@@ -135,6 +143,7 @@ export const StateProvider = ({ children }) => {
         isSaved,
         inBasket,
         clearBasket,
+        clearViewedItems,
       }}>
       {children}
     </StateContext.Provider>

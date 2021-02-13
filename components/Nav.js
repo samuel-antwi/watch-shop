@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { RiUser2Fill } from 'react-icons/ri';
 import { BsHeart, BsBag, BsBagFill, BsHeartFill } from 'react-icons/bs';
+import { FaUserCircle } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import { Turn as Hamburger } from 'hamburger-react';
 import SearchBar from './SearchBar';
@@ -22,7 +23,7 @@ const Nav = () => {
   return (
     <>
       {showMiniBasket && <MiniBasket />}
-      <div className='bg-primary text-gray-100 hidden sm:block'>
+      <div className='bg-primary text-gray-100 hidden sm:block md:mt-6'>
         <div className='md:px-10'>
           <div className='flex items-center justify-between py-5 xl:py-0'>
             <div className='flex items-center'>
@@ -52,31 +53,36 @@ const Nav = () => {
             </div>
             <SearchBar />
             <div className='right_links flex items-center'>
-              <div className='px-5'>
-                <RiUser2Fill size={25} />
+              <div className='px-5 flex flex-col justify-center items-center'>
+                <FaUserCircle className='mb-1.5' size={22} />
+                <p className='text-sm'>Account</p>
               </div>
               <Link href='/saved-items'>
-                <a className=' px-5 cursor-pointer'>
-                  <span>
+                <a className=' px-5 cursor-pointer flex flex-col justify-center items-center '>
+                  <span className='mb-1.5'>
                     {!saved.length ? (
-                      <BsHeart size={25} />
+                      <BsHeart size={22} />
                     ) : (
-                      <BsHeartFill className='text-gray-100' size={25} />
+                      <BsHeartFill className=' text-basket_count' size={22} />
                     )}
                   </span>
+                  <p className='text-sm'>Saved</p>
                 </a>
               </Link>
               <div className=' px-5 cursor-pointer'>
                 <div
-                  className='relative'
+                  className='relative flex flex-col justify-center items-center'
                   onMouseEnter={() => showMiniBasketOnHover()}
                   onClick={() => (basket.length === 0 ? router.push('/basket') : null)}>
-                  <span>{!basket.length ? <BsBag size={25} /> : <BsBagFill size={25} />}</span>
-                  {basket.length !== 0 && (
-                    <span className=' text-center  text-xs font-medium '>
-                      <p className='text-gray-800 -mt-4'>{itemCount}</p>
-                    </span>
-                  )}
+                  <div className='mb-1.5 '>
+                    {!basket.length ? <BsBag size={22} /> : <BsBagFill size={22} />}
+                    {basket.length > 0 && (
+                      <p className='absolute -top-3 left-7 h-5 w-5 rounded-full text-center flex items-center justify-center bg-basket_count text-gray-100 font-medium text-xs'>
+                        {itemCount}
+                      </p>
+                    )}
+                  </div>
+                  <p className='text-sm'>Basket</p>
                 </div>
               </div>
             </div>

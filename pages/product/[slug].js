@@ -11,10 +11,12 @@ const ProductDetail = ({ product }) => {
 
   return (
     <Layout>
-      <div className='max-w-6xl mx-auto sm:px-10 px-5'>
+      <div className='max-w-7xl mx-auto sm:px-10 px-5'>
         <WatchDetail product={product} />
-        <RelatedWatches />
-        <RecentlyViewed />
+        <div className='max-w-4xl mx-auto'>
+          <RelatedWatches />
+          <RecentlyViewed />
+        </div>
       </div>
     </Layout>
   );
