@@ -7,17 +7,15 @@ const Layout = ({ title, children }) => {
   const router = useRouter();
 
   return (
-    <>
-      <div
-        className={`font-futura ${
-          router.pathname === '/watches' || router.pathname === '/basket' ? 'bg-site' : 'bg-white'
-        }`}>
-        <Nav />
-        <Head>{title}</Head>
-        <div className='min-h-screen'>{children}</div>
-        <Footer />
-      </div>
-    </>
+    <div
+      className={`font-futura ${
+        router.pathname === '/watches' || router.pathname === '/basket' ? 'bg-site' : 'bg-white'
+      }`}>
+      <Nav />
+      <Head>{title}</Head>
+      <div className='min-h-screen'>{children}</div>
+      <Footer />
+    </div>
   );
 };
 

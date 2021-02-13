@@ -7,6 +7,7 @@ import {
   REMOVE_FROM_BASKET,
   REMOVE_FROM_SAVED_ITEMS,
   SAVE_FOR_LATER,
+  CLEAR,
 } from 'types';
 import productReducer from '../reducer/productReducer';
 import { StateContext } from './stateContext';
@@ -20,20 +21,17 @@ const initialState = {
 
 export const StateProvider = ({ children }) => {
   const [openSnackbar] = useSnackbar();
-  const [state, dispatch] = useReducer(productReducer, initialState);
+  const [state, dispatch] = useReducer(productReducer, initialState, () => {
+    const localData = process.browser ? localStorage.getItem('state') : '';
+    const storage = localData ? JSON.parse(localData) : '';
+    return storage;
+  });
   const [durationNotification, setDurationNotification] = useState(true);
   const [showMiniBasket, setMiniBasket] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
-    () => {
-      const localData = localStorage.getItem('state');
-      return localData ? JSON.parse(localData) : initialState;
-    };
-  });
-
-  useEffect(() => {
-    window.localStorage.setItem('state', JSON.stringify(state));
+    localStorage.setItem('state', JSON.stringify(state));
   }, [state]);
 
   // Add product to basket
@@ -45,7 +43,6 @@ export const StateProvider = ({ children }) => {
     });
     setMiniBasket(true);
     setDurationNotification(true);
-    // setTimeout(() => setMiniBasket(false), 4000);
     setTimeout(() => setDurationNotification(false), 40000);
   };
 
@@ -57,7 +54,7 @@ export const StateProvider = ({ children }) => {
     });
   };
 
-  // REMOVE FROM BASKET
+  // Remove from basket
   const removeFromBasket = (id) => {
     dispatch({
       type: REMOVE_FROM_BASKET,
@@ -66,7 +63,7 @@ export const StateProvider = ({ children }) => {
     openSnackbar('Item deleted');
   };
 
-  // REMOVE FROM SAVED ITEMS
+  // Remove fron saved items
   const removeFromSavedItems = (id) => {
     dispatch({
       type: REMOVE_FROM_SAVED_ITEMS,
@@ -75,6 +72,7 @@ export const StateProvider = ({ children }) => {
     openSnackbar('Item removed!');
   };
 
+  // Save item for later
   const saveForLater = (product) => {
     dispatch({
       type: SAVE_FOR_LATER,
@@ -83,25 +81,35 @@ export const StateProvider = ({ children }) => {
     openSnackbar('Item saved for later');
   };
 
+  // Increase item qty in basket
   const increase = (payload) => {
     dispatch({ type: INCREASE, payload });
   };
 
+  // Decrease item qty in basket
   const decrease = (payload) => {
     dispatch({ type: DECREASE, payload });
   };
 
+  // Check if an item is already saved for later
   const isSaved = (id) => {
     if (state.saved.find((product) => product.id === id)) {
       return true;
     }
   };
 
+  // Check if an item is already in Basket
   const inBasket = (id) => {
     if (state.basket.find((product) => product.id === id)) {
       return true;
     }
   };
+
+  const clearBasket = () => {
+    dispatch({ type: CLEAR });
+  };
+
+  if (!state) return <p>Loading...</p>;
 
   return (
     <StateContext.Provider
@@ -126,6 +134,7 @@ export const StateProvider = ({ children }) => {
         decrease,
         isSaved,
         inBasket,
+        clearBasket,
       }}>
       {children}
     </StateContext.Provider>
