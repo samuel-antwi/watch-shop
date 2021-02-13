@@ -6,11 +6,8 @@ import {
   SAVE_FOR_LATER,
   REMOVE_FROM_SAVED_ITEMS,
   DECREASE,
+  CLEAR,
 } from 'types';
-
-// const Storage = (basket) => {
-//   localStorage.setItem('cart', JSON.stringify(basket.length > 0 ? basket : []));
-// };
 
 export const sumItems = (basket) => {
   let itemCount = basket.reduce((total, product) => total + product.quantity, 0);
@@ -92,6 +89,14 @@ const productReducer = (state, action) => {
       return {
         ...state,
         viewedItems: [...state.viewedItems],
+      };
+
+    // Clear Basket
+    case CLEAR:
+      return {
+        ...state,
+        basket: [],
+        ...sumItems([]),
       };
 
     // Return default state

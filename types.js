@@ -5,3 +5,4 @@ export const SAVE_FOR_LATER = 'SAVE_FOR_LATER';
 export const ADD_TO_VIEWED_ITEMS = 'ADD_TO_VIEWED_ITEMS';
 export const INCREASE = 'INCREASE';
 export const DECREASE = 'DECREASE';
+export const CLEAR = 'CLEAR';

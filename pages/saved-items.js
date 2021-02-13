@@ -16,7 +16,7 @@ const SavedItems = () => {
           <div className='bg-gray-200 p-6 mb-10'>
             <h1 className='font-semibold tracking-widest text-center md:text-xl'>Saved items</h1>
           </div>
-          <div className='grid grid-cols-4 gap-5 max-w-7xl mx-auto px-8'>
+          <div className='md:grid xl:grid-cols-4 md:grid-cols-3 gap-5 max-w-7xl mx-auto px-8'>
             {saved.map((product) => {
               const { name, images, id, price, instock } = product;
               return (

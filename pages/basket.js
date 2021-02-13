@@ -14,9 +14,8 @@ import { SAVE_FOR_LATER } from 'types';
 
 const Basket = () => {
   const [openSnackbar] = useSnackbar();
-  const { total } = useStateProvider();
-
   const {
+    total,
     basket,
     removeFromBasket,
     isDeleted,
@@ -24,13 +23,15 @@ const Basket = () => {
     decrease,
     saveForLater,
     saved,
+    clearBasket,
+    isBrowser,
   } = useStateProvider();
 
   return (
     <Layout>
       {basket.length !== 0 ? (
-        <div className='max-w-7xl mx-auto px-8 pt-10'>
-          <div className='md:grid grid-cols-3 gap-4'>
+        <div className='xl:max-w-7xl mx-auto px-8 pt-10'>
+          <div className='lg:grid grid-cols-3 gap-4'>
             <motion.div
               initial={{ x: -500 }}
               animate={{ x: 0 }}
@@ -41,6 +42,13 @@ const Basket = () => {
                 <p className='text-gray-700'>Items are reserved for 60 minutes</p>
               </span>
               <hr />
+              <div className='flex text-center justify-center py-5'>
+                <button
+                  onClick={clearBasket}
+                  className='text-red-500 border border-red-600 px-2 py-1 rounded text-sm  uppercase font-medium tracking-wider'>
+                  Clear all
+                </button>
+              </div>
               {basket.map((product) => {
                 const { price, name, images, id, slug, quantity } = product;
                 return (

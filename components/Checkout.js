@@ -17,13 +17,13 @@ const Checkout = () => {
           <h1 className='font-semibold tracking-widest'>Delivery</h1>
           <BsExclamationCircle size={20} />
         </div>
-        <select name='' id=''>
+        {/* <select name='' id=''>
           <option value='next-day'>Next-Day Delivery (Free)</option>
           <option value='click and collect standard'>Click & Collect Standard (Free)</option>
           <option value='click and collect next-day'>Click & Collect Next-Day (Free)</option>
           <option value='standard delivery'>Standard Delivery (Free)</option>
           <option value='same-day delivery'>Same Day Delivery(Order before 2pm - Free)</option>
-        </select>
+        </select> */}
       </div>
       <hr />
       <button className='btn-green w-full mt-5 py-3 mb-3 font-semibold tracking-widest md:text-lg'>
