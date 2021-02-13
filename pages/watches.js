@@ -1,4 +1,5 @@
 import Loading from '@/components/Loading';
+import usePageBottom from 'hooks/usePageBottom';
 import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import Layout from '../components/Layout';
@@ -7,15 +8,21 @@ import { useStateProvider } from '../context/stateProvider';
 import graphcms from '../graphql/client';
 import { ALL_WATCHES } from '../graphql/queries';
 
-const Watches = ({ edges, pageInfo }) => {
+const Watches = () => {
   const [pageSize, setPageSize] = useState(12);
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [getPageInfo, setGetPageInfo] = useState('');
 
+  const bottom = usePageBottom();
+
   useEffect(() => {
     fetchWatches();
   }, [pageSize]);
+
+  useEffect(() => {
+    fetchMore();
+  }, [bottom]);
 
   async function fetchWatches() {
     setLoading(true);
@@ -30,12 +37,21 @@ const Watches = ({ edges, pageInfo }) => {
     setLoading(false);
   }
 
+  const fetchMore = () => {
+    if (bottom) {
+      setPageSize((prev) => prev + 4);
+    }
+  };
+
   return (
     <Layout>
       <div className='py-10 container mx-auto px-10'>
         {/* <WatchList products={edges} /> */}
         <WatchList products={products} />
         <div className='py-10 flex items-center justify-center'>
+          {loading && getPageInfo.hasNextPage && <Loading />}
+        </div>
+        {/* <div className='py-10 flex items-center justify-center'>
           {!loading && getPageInfo.hasNextPage && (
             <button
               onClick={() => setPageSize((prev) => prev + 4)}
@@ -44,7 +60,7 @@ const Watches = ({ edges, pageInfo }) => {
             </button>
           )}
           {loading && <Loading />}
-        </div>
+        </div> */}
       </div>
     </Layout>
   );

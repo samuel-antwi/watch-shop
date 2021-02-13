@@ -50,7 +50,7 @@ export const StateProvider = ({ children }) => {
   const addToViewedItems = (product) => {
     dispatch({
       type: ADD_TO_VIEWED_ITEMS,
-      payload: { product },
+      payload: product,
     });
   };
 

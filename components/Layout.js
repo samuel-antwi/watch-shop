@@ -14,7 +14,7 @@ const Layout = ({ title, children }) => {
       <Nav />
       <Head>{title}</Head>
       <div className='min-h-screen'>{children}</div>
-      <Footer />
+      {router.pathname !== '/watches' && <Footer />}
     </div>
   );
 };

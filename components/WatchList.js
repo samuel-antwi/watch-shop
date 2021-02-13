@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import Link from 'next/link';
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useStateProvider } from '../context/stateProvider';
 
@@ -15,10 +14,14 @@ const WatchList = ({ products }) => {
         const { name, images, id, price, instock, slug } = product.node;
         return (
           <div className='bg-white relative' key={id}>
-            <div className='col-span-1 shadow border'>
+            <div
+              onClick={() => addToViewedItems(product.node)}
+              className='col-span-1 shadow border p-5'>
               <Link href={`/product/${slug}`}>
                 <a>
-                  <Image width={300} height={300} loading='eager' src={images[0].url} />
+                  <motion.div whileHover={{ rotateY: 180 }}>
+                    <Image width={300} height={300} loading='eager' src={images[0].url} />
+                  </motion.div>
                 </a>
               </Link>
               <div className='p-6'>

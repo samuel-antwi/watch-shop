@@ -79,10 +79,8 @@ const productReducer = (state, action) => {
 
     // Add to recently viewed items
     case ADD_TO_VIEWED_ITEMS:
-      if (
-        !state.viewedItems.find((item) => item.product.node.id === action.payload.product.node.id)
-      ) {
-        state.viewedItems.push({
+      if (!state.viewedItems.find((product) => product.id === action.payload.id)) {
+        state.viewedItems.unshift({
           ...action.payload,
         });
       }
