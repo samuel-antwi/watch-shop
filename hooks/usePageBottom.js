@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 
 const usePageBottom = () => {
-  const [bottom, setBottom] = useState(false);
+  const [isBottomOfPage, setIsBottomOfPage] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const isBottom =
         window.innerHeight + Math.ceil(window.pageYOffset) >= document.body.offsetHeight;
-      setBottom(isBottom);
+      setIsBottomOfPage(isBottom);
     };
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -15,7 +15,7 @@ const usePageBottom = () => {
     };
   }, []);
 
-  return bottom;
+  return isBottomOfPage;
 };
 
 export default usePageBottom;

@@ -6,6 +6,10 @@ module.exports = {
       fontFamily: {
         futura: ['Futura', 'sans-serif'],
       },
+      textColor: (theme) => theme('colors'),
+      textColor: {
+        basket_count: '#de0079',
+      },
       backgroundColor: (theme) => ({
         ...theme('colors'),
         primary: '#2d2d2d',
@@ -13,6 +17,7 @@ module.exports = {
         site: '#f5f5f5',
         mini_nav_sale: '#007a20',
         btn_green_bg: '#008848',
+        basket_count: '#de0079',
       }),
       screens: {
         xxs: '280px',
