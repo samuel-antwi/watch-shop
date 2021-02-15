@@ -13,7 +13,6 @@ const Watches = () => {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [getPageInfo, setGetPageInfo] = useState('');
-
   const bottom = usePageBottom();
 
   useEffect(() => {
@@ -24,7 +23,7 @@ const Watches = () => {
     fetchMore();
   }, [bottom]);
 
-  async function fetchWatches() {
+  const fetchWatches = async () => {
     setLoading(true);
     const {
       productsConnection: { edges, pageInfo },
@@ -35,17 +34,14 @@ const Watches = () => {
     setProducts(edges);
     setGetPageInfo(pageInfo);
     setLoading(false);
-  }
-
-  const fetchMore = () => {
-    if (bottom) {
-      setPageSize((prev) => prev + 4);
-    }
   };
+
+  // Fetch more watches when user scrolls to the bottom of the page
+  const fetchMore = () => (bottom ? setPageSize((prev) => prev + 4) : null);
 
   return (
     <Layout>
-      <div className='py-10 container mx-auto px-10'>
+      <div className='py-10 container mx-auto '>
         {/* <WatchList products={edges} /> */}
         <WatchList products={products} />
         <div className='py-10 flex items-center justify-center'>

@@ -19,7 +19,7 @@ const WatchList = ({ products }) => {
               className='col-span-1 shadow border p-5'>
               <Link href={`/product/${slug}`}>
                 <a>
-                  <motion.div whileHover={{ rotateY: 180 }}>
+                  <motion.div whileHover={{ scale: 1.07 }}>
                     <Image width={300} height={300} loading='eager' src={images[0].url} />
                   </motion.div>
                 </a>

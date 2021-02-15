@@ -12,7 +12,7 @@ const RecentlyViewed = () => {
   const { viewedItems, clearViewedItems } = useStateProvider();
 
   return viewedItems.length !== 0 ? (
-    <div className='md:mt-40 mt-20'>
+    <div className='md:mt-40 mt-20 mb-20'>
       <div className='flex items-center justify-between '>
         <h1 className=' font-bold mb-3 tracking-wide uppercase text-xs md:text-base text-gray-800'>
           Recently viewed
@@ -23,7 +23,7 @@ const RecentlyViewed = () => {
           clear all
         </button>
       </div>
-      <Slider {...slickSettings}>
+      <Slider {...slickSettings(viewedItems.length)}>
         {viewedItems.map((product) => {
           const { name, id, images, price, slug } = product;
           return (
