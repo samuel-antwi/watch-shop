@@ -19,9 +19,13 @@ const WatchDetail = ({ product }) => {
       <div className='col-span-1 pt-4 -mr-5 hidden md:block'>
         {images.map((image, index) => (
           <div key={image.id}>
-            <button onClick={() => setImageIndex(index)}>
-              <img className='w-16  mb-5' src={image.url} alt={name} />
-            </button>
+            <div className='cursor-pointer' onClick={() => setImageIndex(index)}>
+              <img
+                className={`${index === imageIndex && 'border-2 border-blue-700'}  w-16 mb-5 py-2`}
+                src={image.url}
+                alt={name}
+              />
+            </div>
           </div>
         ))}
       </div>

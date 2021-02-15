@@ -41,11 +41,11 @@ const Basket = () => {
                 <p className='text-gray-700'>Items are reserved for 60 minutes</p>
               </span>
               <hr />
-              <div className='flex text-center justify-center py-5'>
+              <div className='flex text-center justify-start px-8 py-5'>
                 {basket.length > 1 && (
                   <button
                     onClick={clearBasket}
-                    className='text-red-500 border border-red-600 px-2 py-1 rounded text-sm  uppercase font-medium tracking-wider'>
+                    className='text-gray-700 bg-gray-300 px-2 py-1 text-sm  uppercase font-medium tracking-wider'>
                     Clear all
                   </button>
                 )}

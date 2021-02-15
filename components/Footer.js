@@ -10,7 +10,7 @@ const Footer = () => {
 
   return (
     <Styles>
-      <div className='footer__links mt-20'>
+      <div className='footer__links'>
         <div className='footer_links_wrapper mx-auto grid md:grid-cols-3 text-gray-200 px-5 md:px-40 py-10 gap-10'>
           <div className='col-span-1'>
             <h1 className='text-2xl font-semibold text-gray-200'>Sabuto Watch</h1>

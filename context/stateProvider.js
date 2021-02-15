@@ -14,6 +14,26 @@ import productReducer from '../reducer/productReducer';
 import { StateContext } from './stateContext';
 import { useSnackbar } from 'react-simple-snackbar';
 
+// const initialState = () => {
+//   if (typeof window !== 'undefined') {
+//     return {
+//       basket:
+//         window.localStorage.getItem('basket') === null ? [] : window.localStorage.getItem('basket'),
+//       viewedItems:
+//         window.localStorage.getItem('viewedItems') === null
+//           ? []
+//           : window.localStorage.getItem('viewedItems'),
+//       saved:
+//         window.localStorage.getItem('saved') === null ? [] : window.localStorage.getItem('saved'),
+//     };
+//   }
+//   return {
+//     basket: [],
+//     viewedItems: [],
+//     saved: [],
+//   };
+// };
+
 const initialState = {
   basket: [],
   viewedItems: [],
@@ -23,16 +43,26 @@ const initialState = {
 export const StateProvider = ({ children }) => {
   const [openSnackbar] = useSnackbar();
   const [state, dispatch] = useReducer(productReducer, initialState, () => {
-    const localData = process.browser ? localStorage.getItem('state') : '';
-    const storage = localData ? JSON.parse(localData) : '';
-    return storage;
+    if (process.browser) {
+      const localData = localStorage.getItem('state');
+      return localData ? JSON.parse(localData) : null;
+    }
+    return {
+      basket: [],
+      viewedItems: [],
+      saved: [],
+    };
   });
   const [durationNotification, setDurationNotification] = useState(true);
   const [showMiniBasket, setMiniBasket] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
 
+  // useEffect(() => {
+  //   localStorage.setItem('state', JSON.stringify(state));
+  // }, [state]);
+
   useEffect(() => {
-    localStorage.setItem('state', JSON.stringify(state));
+    window.localStorage.setItem('state', JSON.stringify(state));
   }, [state]);
 
   // Add product to basket
@@ -117,7 +147,7 @@ export const StateProvider = ({ children }) => {
     dispatch({ type: CLEAR });
   };
 
-  if (!state) return <p>Loading...</p>;
+  // if (!state) return <p>Loading...</p>;
 
   return (
     <StateContext.Provider

@@ -1,7 +1,6 @@
 import { useStateProvider } from 'context/stateProvider';
 import React, { useState } from 'react';
 import { Turn as Hamburger } from 'hamburger-react';
-import { useSnackbar } from 'react-simple-snackbar';
 import Link from 'next/link';
 
 const MiniNav = () => {
@@ -10,8 +9,8 @@ const MiniNav = () => {
   return (
     <div
       className={`${
-        !showMiniBasket ? ' bg-mini_nav_sale' : 'bg-secondary'
-      } p-5 text-gray-100 z-10`}>
+        !showMiniBasket ? ' md:bg-mini_nav_sale bg-gray-900  ' : 'bg-secondary'
+      } p-5 text-gray-100 z-10 `}>
       <div className='hidden sm:block'>
         <div className='container flex justify-between items-center space-x-4'>
           <Link href='/watches'>
