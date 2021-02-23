@@ -12,11 +12,9 @@ const MiniBasket = () => {
       initial={{ y: -500 }}
       animate={{ y: 0 }}
       transition={{ duration: 1 }}
-      className='absolute right-5 top-20 z-20 bg-white'>
+      className='absolute right-5 top-16 z-20 bg-white'>
       {basket.length > 0 ? (
-        <div
-          onMouseLeave={() => setMiniBasket(false)}
-          className=' border border-gray-300'>
+        <div onMouseLeave={() => setMiniBasket(false)} className=' border border-gray-300'>
           <MiniBasketHeader />
           <MiniBasketList />
           <SubTotal />

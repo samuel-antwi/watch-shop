@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import SnackbarProvider from 'react-simple-snackbar';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { UserProvider } from '@auth0/nextjs-auth0';
 
 const client = new QueryClient({
   defaultOptions: {
@@ -16,13 +17,15 @@ const client = new QueryClient({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <QueryClientProvider client={client}>
-      <SnackbarProvider>
-        <StateProvider>
-          <Component {...pageProps} />
-        </StateProvider>
-      </SnackbarProvider>
-    </QueryClientProvider>
+    <UserProvider>
+      <QueryClientProvider client={client}>
+        <SnackbarProvider>
+          <StateProvider>
+            <Component {...pageProps} />
+          </StateProvider>
+        </SnackbarProvider>
+      </QueryClientProvider>
+    </UserProvider>
   );
 }
 

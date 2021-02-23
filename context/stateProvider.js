@@ -14,26 +14,6 @@ import productReducer from '../reducer/productReducer';
 import { StateContext } from './stateContext';
 import { useSnackbar } from 'react-simple-snackbar';
 
-// const initialState = () => {
-//   if (typeof window !== 'undefined') {
-//     return {
-//       basket:
-//         window.localStorage.getItem('basket') === null ? [] : window.localStorage.getItem('basket'),
-//       viewedItems:
-//         window.localStorage.getItem('viewedItems') === null
-//           ? []
-//           : window.localStorage.getItem('viewedItems'),
-//       saved:
-//         window.localStorage.getItem('saved') === null ? [] : window.localStorage.getItem('saved'),
-//     };
-//   }
-//   return {
-//     basket: [],
-//     viewedItems: [],
-//     saved: [],
-//   };
-// };
-
 const initialState = {
   basket: [],
   viewedItems: [],
@@ -55,6 +35,7 @@ export const StateProvider = ({ children }) => {
   });
   const [durationNotification, setDurationNotification] = useState(true);
   const [showMiniBasket, setMiniBasket] = useState(false);
+  const [showMiniAccount, setMiniAccount] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
 
   // useEffect(() => {
@@ -174,6 +155,8 @@ export const StateProvider = ({ children }) => {
         inBasket,
         clearBasket,
         clearViewedItems,
+        showMiniAccount,
+        setMiniAccount,
       }}>
       {children}
     </StateContext.Provider>

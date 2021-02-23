@@ -8,9 +8,18 @@ import SearchBar from './SearchBar';
 import { useStateProvider } from '../context/stateProvider';
 import MiniBasket from './miniBasket/MiniBasket';
 import MiniNav from './MiniNav';
+import MiniAccount from './MiniAccount';
 
 const Nav = () => {
-  const { basket, setMiniBasket, showMiniBasket, saved, itemCount } = useStateProvider();
+  const {
+    basket,
+    setMiniBasket,
+    showMiniBasket,
+    saved,
+    itemCount,
+    showMiniAccount,
+    setMiniAccount,
+  } = useStateProvider();
   const router = useRouter();
   const watchesRouter = router.pathname === '/watches';
   const strapsRouter = router.pathname === '/straps';
@@ -23,6 +32,7 @@ const Nav = () => {
   return (
     <>
       {showMiniBasket && <MiniBasket />}
+      {showMiniAccount && <MiniAccount />}
       <div className='bg-primary text-gray-100 hidden sm:block md:mt-6'>
         <div className='md:px-10'>
           <div className='flex items-center justify-between py-5 xl:py-0'>
@@ -53,8 +63,13 @@ const Nav = () => {
             </div>
             <SearchBar />
             <div className='right_links flex items-center'>
-              <div className='px-5 flex flex-col justify-center items-center'>
-                <FaUserCircle className='mb-1.5' size={22} />
+              <div
+                onMouseEnter={() => {
+                  setMiniAccount(true);
+                  setMiniBasket(false);
+                }}
+                className='px-5 flex flex-col cursor-pointer  justify-center items-center'>
+                <FaUserCircle className='mb-1.5 ' size={22} />
                 <p className='text-sm'>Account</p>
               </div>
               <Link href='/saved-items'>
@@ -69,12 +84,17 @@ const Nav = () => {
                   <p className='text-sm'>Saved</p>
                 </a>
               </Link>
-              <div className=' px-5 cursor-pointer'>
-                <div
-                  className='relative flex flex-col justify-center items-center'
-                  onMouseEnter={() => showMiniBasketOnHover()}
-                  onClick={() => (basket.length === 0 ? router.push('/basket') : null)}>
-                  <div className='mb-1.5 '>
+              <div className=' px-5 '>
+                <div className='relative flex flex-col justify-center items-center'>
+                  <div
+                    onMouseEnter={() => {
+                      if (router.pathname !== '/basket') {
+                        setMiniBasket(true);
+                        setMiniAccount(false);
+                      }
+                    }}
+                    onClick={() => (basket.length === 0 ? router.push('/basket') : null)}
+                    className='mb-1.5 cursor-pointer'>
                     {!basket.length ? <BsBag size={22} /> : <BsBagFill size={22} />}
                     {basket.length > 0 && (
                       <p className='absolute -top-3 left-7 h-5 w-5 rounded-full text-center flex items-center justify-center bg-basket_count text-gray-100 font-medium text-xs'>
@@ -94,13 +114,3 @@ const Nav = () => {
   );
 };
 export default Nav;
-
-{
-  /* <div>
-  {saved.length !== 0 && (
-    <span className=' text-center  text-xs font-medium '>
-      <p className='text-gray-100 -mt-5'>{saved.length}</p>
-    </span>
-  )}
-</div>; */
-}
