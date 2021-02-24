@@ -5,8 +5,17 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useStateProvider } from '../context/stateProvider';
 
-const WatchList = ({ products }) => {
-  const { addToBasket, addToViewedItems, saveForLater, isSaved } = useStateProvider();
+const WatchList = ({ products, loading }) => {
+  const {
+    addToBasket,
+    addToViewedItems,
+    saveForLater,
+    isSaved,
+    increase,
+    inBasket,
+  } = useStateProvider();
+
+  // if (loading) return <Loading />;
 
   return (
     <div className='grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-5'>
@@ -45,7 +54,14 @@ const WatchList = ({ products }) => {
             </div>
             <button
               disabled={!instock}
-              onClick={() => addToBasket(product.node)}
+              // onClick={() => addToBasket(product.node)}
+              onClick={() => {
+                if (inBasket(id)) {
+                  return increase(id);
+                } else {
+                  addToBasket(product.node);
+                }
+              }}
               className={`${
                 instock
                   ? ' bg-gray-700 text-gray-100 border border-gray-700 hover:bg-gray-900'

@@ -38,10 +38,6 @@ export const StateProvider = ({ children }) => {
   const [showMiniAccount, setMiniAccount] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
 
-  // useEffect(() => {
-  //   localStorage.setItem('state', JSON.stringify(state));
-  // }, [state]);
-
   useEffect(() => {
     window.localStorage.setItem('state', JSON.stringify(state));
   }, [state]);
@@ -56,6 +52,7 @@ export const StateProvider = ({ children }) => {
     setMiniBasket(true);
     setDurationNotification(true);
     setTimeout(() => setDurationNotification(false), 40000);
+    setTimeout(() => setMiniBasket(false), 4000);
   };
 
   // Add product to recently viewed items list
@@ -103,6 +100,8 @@ export const StateProvider = ({ children }) => {
   // Increase item qty in basket
   const increase = (payload) => {
     dispatch({ type: INCREASE, payload });
+    setMiniBasket(true);
+    setTimeout(() => setMiniBasket(false), 4000);
   };
 
   // Decrease item qty in basket
@@ -127,8 +126,6 @@ export const StateProvider = ({ children }) => {
   const clearBasket = () => {
     dispatch({ type: CLEAR });
   };
-
-  // if (!state) return <p>Loading...</p>;
 
   return (
     <StateContext.Provider

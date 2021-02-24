@@ -43,7 +43,7 @@ const Watches = () => {
     <Layout>
       <div className='py-10 container mx-auto '>
         {/* <WatchList products={edges} /> */}
-        <WatchList products={products} />
+        <WatchList products={products} loading={loading} />
         <div className='py-10 flex items-center justify-center'>
           {loading && getPageInfo.hasNextPage && <Loading />}
         </div>
