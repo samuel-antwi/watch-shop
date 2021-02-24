@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useStateProvider } from '../context/stateProvider';
 
-const WatchList = ({ products, loading }) => {
+const StrapList = ({ products, loading }) => {
   const {
     addToBasket,
     addToViewedItems,
@@ -26,7 +26,7 @@ const WatchList = ({ products, loading }) => {
             <div
               onClick={() => addToViewedItems(product.node)}
               className='col-span-1 shadow border p-5'>
-              <Link href={`/watch/${slug}`}>
+              <Link href={`/strap/${slug}`}>
                 <a>
                   <motion.div whileHover={{ scale: 1.07 }}>
                     <Image width={300} height={300} loading='eager' src={images[0].url} />
@@ -34,7 +34,7 @@ const WatchList = ({ products, loading }) => {
                 </a>
               </Link>
               <div className='p-6'>
-                <Link href={`/product/${slug}`}>
+                <Link href={`/strap/${slug}`}>
                   <a>
                     <p className='mb-6 text-gray-600'>{name}</p>
                   </a>
@@ -76,4 +76,4 @@ const WatchList = ({ products, loading }) => {
   );
 };
 
-export default WatchList;
+export default StrapList;

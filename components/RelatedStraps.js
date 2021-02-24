@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import graphcms from 'graphql/client';
-import { GET_RELATED_WATCHES } from 'graphql/queries';
+import { GET_RELATED_WATCHES, GET_RELATED_STRAPS } from 'graphql/queries';
 import Link from 'next/link';
 import Image from 'next/image';
 import { elipsis } from 'utils/elipsis';
@@ -11,7 +11,7 @@ import { useStateProvider } from 'context/stateProvider';
 import { settings } from 'utils/slick';
 import { motion } from 'framer-motion';
 
-const RelatedWatches = () => {
+const RelatedStraps = () => {
   const { addToViewedItems } = useStateProvider();
   const [data, setData] = useState([]);
   const [size, setSize] = useState(10);
@@ -22,9 +22,9 @@ const RelatedWatches = () => {
   }, [query]);
 
   const fetchProducts = async () => {
-    const { products } = await graphcms.request(GET_RELATED_WATCHES, {
+    const { products } = await graphcms.request(GET_RELATED_STRAPS, {
       slug: query.slug,
-      name: 'Watch',
+      name: 'Accessories',
       size,
     });
     setData(products);
@@ -38,7 +38,7 @@ const RelatedWatches = () => {
           data.map((product) => {
             const { name, id, images, price, slug } = product;
             return (
-              <Link href={`/product/${slug}`} key={id}>
+              <Link href={`/strap/${slug}`} key={id}>
                 <a onClick={() => addToViewedItems(product)} className='col-span-1'>
                   <Image
                     src={images[0].url}
@@ -63,4 +63,4 @@ const RelatedWatches = () => {
   );
 };
 
-export default RelatedWatches;
+export default RelatedStraps;
