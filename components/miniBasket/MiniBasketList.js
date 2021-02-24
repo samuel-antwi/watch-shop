@@ -14,30 +14,27 @@ const MiniBasketList = () => {
       {basket?.map((product) => {
         const { name, images, price, id, slug, quantity } = product;
         return (
-          <Link href={`/product/${slug}`} key={id}>
-            <a>
-              <div className='pt-3 grid grid-cols-5 max-w-sm border-b-2 cursor-pointer'>
-                <div className='col-span-1'>
+          <div key={id} className='pt-3 grid grid-cols-5 max-w-sm border-b-2'>
+            <div className='col-span-1'>
+              <Link href={`/product/${slug}`}>
+                <a>
                   <Image src={images[0].url} width={130} height={130} />
-                </div>
-                <div className='col-span-4 px-3'>
-                  <p className='font-semibold text-gray-800 mb-3 tracking-wide'>
-                    £{price}.00
-                  </p>
-                  <p className='text-gray-700 mb-6'>{name}</p>
-                  <div className='flex justify-between items-center mb-3'>
-                    <p>Qty: {quantity}</p>
-                    <button type='button' onClick={() => removeFromBasket(id)}>
-                      <BsTrash
-                        className=' hover:text-red-500 cursor-default'
-                        size={20}
-                      />
-                    </button>
-                  </div>
-                </div>
+                </a>
+              </Link>
+            </div>
+            <div className='col-span-4 px-3'>
+              <p className='font-semibold text-gray-800 mb-3 tracking-wide'>£{price}.00</p>
+              <Link href={`/product/${slug}`}>
+                <a className='text-gray-700 mb-6 hover:text-blue-400'>{name}</a>
+              </Link>
+              <div className='flex justify-between items-center mb-3'>
+                <p>Qty: {quantity}</p>
+                <button type='button' onClick={() => removeFromBasket(id)}>
+                  <BsTrash className=' hover:text-red-500 cursor-default' size={20} />
+                </button>
               </div>
-            </a>
-          </Link>
+            </div>
+          </div>
         );
       })}
     </div>
