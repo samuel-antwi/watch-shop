@@ -64,7 +64,7 @@ const Nav = () => {
             <SearchBar />
             <div className='right_links flex items-center'>
               <div
-                onMouseEnter={() => {
+                onClick={() => {
                   setMiniAccount(true);
                   setMiniBasket(false);
                 }}

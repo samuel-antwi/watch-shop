@@ -42,21 +42,10 @@ const Watches = () => {
   return (
     <Layout>
       <div className='py-10 container mx-auto '>
-        {/* <WatchList products={edges} /> */}
         <WatchList products={products} loading={loading} />
         <div className='py-10 flex items-center justify-center'>
           {loading && getPageInfo.hasNextPage && <Loading />}
         </div>
-        {/* <div className='py-10 flex items-center justify-center'>
-          {!loading && getPageInfo.hasNextPage && (
-            <button
-              onClick={() => setPageSize((prev) => prev + 4)}
-              className='border border-gray-500 py-2 px-10 font-semibold tracking-widest text-sm'>
-              LOAD MORE
-            </button>
-          )}
-          {loading && <Loading />}
-        </div> */}
       </div>
     </Layout>
   );

@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout';
-import WatchDetail from '@/components/product/WatchDetail';
+import WatchDetail from '@/components/watch/WatchDetail';
 import RecentlyViewed from '@/components/RecentlyViewed';
 import RelatedWatches from '@/components/RelatedWatches';
 import graphcms from 'graphql/client';
