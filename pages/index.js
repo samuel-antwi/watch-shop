@@ -5,7 +5,7 @@ import Typewriter from 'typewriter-effect';
 import Layout from '@/components/Layout';
 import Features from '@/components/Features';
 import WatchShowcase from '@/components/WatchShowcase';
-import StrapShowcase from '@/components/StrapshowCase';
+import StrapShowcase from '@/components/StrapShowcase';
 
 const Home = () => {
   const [typewriter, setType] = useState(false);

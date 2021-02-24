@@ -1,8 +1,7 @@
 import Layout from '@/components/Layout';
 import RecentlyViewed from '@/components/RecentlyViewed';
-import RelatedWatches from '@/components/RelatedWatches';
 import graphcms from 'graphql/client';
-import { ALL_WATCHES, GET_WATCH, GET_STRAP, ALL_STRAPS } from 'graphql/queries';
+import { GET_STRAP, ALL_STRAPS } from 'graphql/queries';
 import { useStateProvider } from 'context/stateProvider';
 import StrapDetails from '@/components/strap/StrapDetails';
 import RelatedStraps from '@/components/RelatedStraps';
