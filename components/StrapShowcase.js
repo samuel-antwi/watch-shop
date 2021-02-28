@@ -21,8 +21,8 @@ const StrapShowcase = () => {
     <div className='bg-gray-800'>
       <div className='container mx-auto py-20'>
         <div className='py-10 max-w-4xl mx-auto space-y-4'>
-          <h2 className='font-bold py-5 md:text-2xl text-gray-100 text-center tracking-widest'>
-            ABOUT OUR SMART WATCHES
+          <h2 className='font-bold capitalize py-5 md:text-2xl text-gray-100 text-center tracking-widest'>
+            style with different variesties of straps
           </h2>
           <p className='text-lg text-gray-100 text-center'>
             Carefully desined by our experts to be more reburst without any compromise
