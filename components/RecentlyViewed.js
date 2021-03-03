@@ -24,10 +24,10 @@ const RecentlyViewed = () => {
       </div>
       <Slider {...slickSettings(viewedItems.length)}>
         {viewedItems.map((product) => {
-          const { name, id, images, price, slug } = product;
+          const { name, id, images, price, slug, category } = product;
           return (
             <React.Fragment key={id}>
-              <Link href={`/product/${slug}`}>
+              <Link href={category.name === 'Watch' ? `/watch/${slug}` : `/strap/${slug}`}>
                 <a className='col-span-4 '>
                   <motion.div
                     whileHover={{ scale: 1.07 }}

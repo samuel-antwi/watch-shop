@@ -1,3 +1,4 @@
+import { useStateProvider } from 'context/stateProvider';
 import graphcms from 'graphql/client';
 import { SHOWCASE_STRAPS } from 'graphql/queries';
 import Image from 'next/image';
@@ -6,12 +7,11 @@ import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 
 const StrapShowcase = () => {
+  const { addToViewedItems } = useStateProvider();
   const { data, isError, isLoading } = useQuery(['strap'], async () => {
     const { products } = await graphcms.request(SHOWCASE_STRAPS, { slug: 'accessories' });
     return products;
   });
-
-  console.log(data);
 
   const router = useRouter();
 
