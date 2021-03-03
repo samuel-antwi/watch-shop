@@ -38,7 +38,7 @@ const RelatedWatches = () => {
           data.map((product) => {
             const { name, id, images, price, slug } = product;
             return (
-              <Link href={`/product/${slug}`} key={id}>
+              <Link href={`/watch/${slug}`} key={id}>
                 <a onClick={() => addToViewedItems(product)} className='col-span-1'>
                   <Image
                     src={images[0].url}

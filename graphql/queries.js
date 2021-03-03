@@ -10,6 +10,9 @@ export const ALL_WATCHES = gql`
           id
           name
           slug
+          category {
+            name
+          }
           price
           instock
           images {
@@ -28,7 +31,7 @@ export const ALL_WATCHES = gql`
   }
 `;
 export const ALL_STRAPS = gql`
-  query queryAllWatches($slug: String!, $pageSize: Int!) {
+  query queryAllStraps($slug: String!, $pageSize: Int!) {
     __typename
     productsConnection(first: $pageSize, where: { category: { slug: $slug } }) {
       edges {
@@ -36,6 +39,9 @@ export const ALL_STRAPS = gql`
         node {
           id
           name
+          category {
+            name
+          }
           slug
           price
           instock
@@ -65,6 +71,9 @@ export const GET_WATCH = gql`
         id
       }
       instock
+      category {
+        name
+      }
       model
       name
       price
@@ -94,6 +103,9 @@ export const GET_STRAP = gql`
         id
       }
       instock
+      category {
+        name
+      }
       model
       name
       price
@@ -121,6 +133,9 @@ export const GET_RELATED_WATCHES = gql`
       images {
         url
       }
+      category {
+        name
+      }
       name
       price
       slug
@@ -134,6 +149,9 @@ export const GET_RELATED_STRAPS = gql`
       id
       images {
         url
+      }
+      category {
+        name
       }
       name
       price
@@ -150,6 +168,9 @@ export const SHOWCASE_WATCHES = gql`
         url
       }
       slug
+      category {
+        name
+      }
     }
   }
 `;
@@ -161,6 +182,13 @@ export const SHOWCASE_STRAPS = gql`
         url
       }
       slug
+      price
+      description {
+        markdown
+      }
+      category {
+        name
+      }
     }
   }
 `;

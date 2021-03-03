@@ -30,7 +30,7 @@ const WatchShowcase = () => {
         <div className='md:grid grid-cols-4 gap-5'>
           {data.map((watch, index) => (
             <div key={index}>
-              <Link href={`/product/${watch.slug}`}>
+              <Link href={`/watch/${watch.slug}`}>
                 <a>
                   <Image
                     className='transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
