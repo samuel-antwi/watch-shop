@@ -9,6 +9,7 @@ import { useStateProvider } from '../context/stateProvider';
 import MiniBasket from './miniBasket/MiniBasket';
 import MiniNav from './MiniNav';
 import MiniAccount from './MiniAccount';
+import { useState } from 'react';
 
 const Nav = () => {
   const {
@@ -23,6 +24,7 @@ const Nav = () => {
   const router = useRouter();
   const watchesRouter = router.pathname === '/watches';
   const strapsRouter = router.pathname === '/straps';
+  const [isOpen, setOpen] = useState(false);
 
   // Show miniBasket when the bag icon is hovered
   const showMiniBasketOnHover = () => {

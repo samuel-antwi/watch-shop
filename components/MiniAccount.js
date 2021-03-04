@@ -18,7 +18,7 @@ const MiniAccount = () => {
         initial={{ y: -500 }}
         animate={{ y: 0 }}
         transition={{ duration: 1 }}
-        className='absolute border right-40 max-w-xs w-full top-16 z-20 bg-white'>
+        className='absolute border md:right-40 max-w-xs w-full top-16 z-20 bg-white'>
         <MiniAccountHeading user={user} />
         <div className='p-5'>
           <Link href='/account'>
