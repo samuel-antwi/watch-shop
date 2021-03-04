@@ -29,16 +29,18 @@ const Basket = () => {
   return (
     <Layout>
       {basket.length !== 0 ? (
-        <div className='xl:max-w-7xl mx-auto px-8 pt-10'>
+        <div className='xl:max-w-7xl mx-auto px-8 pt-10 mb-10'>
           <div className='lg:grid grid-cols-3 gap-4'>
             <motion.div
               initial={{ x: -500 }}
               animate={{ x: 0 }}
               transition={{ duration: 0.8 }}
               className='col-span-2 bg-white shadow'>
-              <span className='flex justify-between items-center px-8 py-10'>
-                <h1 className='font-semibold text-lg tracking-wider text-gray-700'>MY BAG</h1>
-                <p className='text-gray-700'>Items are reserved for 60 minutes</p>
+              <span className='flex justify-between items-center md:px-8 px-4 py-10'>
+                <h1 className='font-semibold md:text-lg md:tracking-wider text-gray-700'>MY BAG</h1>
+                <p className='text-gray-700 sm:text-base xs:text-sm'>
+                  Items are reserved for 60 minutes
+                </p>
               </span>
               <hr />
               <div className='flex text-center justify-start px-8 py-5'>
